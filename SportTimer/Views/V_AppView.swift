@@ -17,10 +17,32 @@ struct AppView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        if(!timerManager.hasStartedExercise) {
-            beforeStartView
-        } else {
-            exerciseView
+        NavigationStack {
+            VStack {
+                Spacer()
+                NavigationLink("Start Exercise") {
+                    if(!timerManager.hasStartedExercise) {
+                        beforeStartView
+                    } else {
+                        exerciseView
+                            .onDisappear{
+                                withAnimation {
+                                    timerManager.resetExerciseProgramToStart()
+                                }
+                            }
+                    }
+                }
+                Spacer()
+                NavigationLink("Select Exercise") {
+                    Text("To be implemented!")
+                }
+                Spacer()
+                NavigationLink("Create Exercise") {
+                    Text("To be implemented!")
+                }
+                Spacer()
+            }
+            .navigationTitle("Sportstimer")
         }
    }
     
@@ -77,7 +99,7 @@ struct AppView: View {
                 //self.playSound()
                 timerManager.setToNextExercise()
             }
-            }
+        }
     }
     
     ///View that is shown if the workout is in a pause

@@ -31,10 +31,11 @@ class TimerManager: ObservableObject {
     
     func startExercise(set: ExerciseSet) {
         exerciseSet = set
-        currentExercise = exerciseSet.exercises.first!
-        remainingTime = exerciseSet.exercises.first!.durationInSeconds
+        resetExerciseProgramToStart()
         hasStartedExercise = true
     }
+    
+    
     
     ///This function is called by the View if the time of the last exercise ran out
     ///or if needs to start the execution of exercises

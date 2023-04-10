@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		900E84D729E47E2D001D4D6C /* V_CreateNewExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E84D629E47E2D001D4D6C /* V_CreateNewExerciseView.swift */; };
 		90E6745E29E431220060C2F6 /* MVC_ExerciseChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */; };
-		90E6746029E433DC0060C2F6 /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6745F29E433DC0060C2F6 /* ExerciseSet.swift */; };
+		90E6746029E433DC0060C2F6 /* M_ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */; };
 		90F0CFBC28A6A0C900864973 /* SportTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0CFBB28A6A0C900864973 /* SportTimerApp.swift */; };
 		90F0CFBE28A6A0C900864973 /* V_AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0CFBD28A6A0C900864973 /* V_AppView.swift */; };
 		90F0CFC028A6A0CB00864973 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90F0CFBF28A6A0CB00864973 /* Assets.xcassets */; };
@@ -40,8 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		900E84D629E47E2D001D4D6C /* V_CreateNewExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_CreateNewExerciseView.swift; sourceTree = "<group>"; };
 		90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseChooser.swift; sourceTree = "<group>"; };
-		90E6745F29E433DC0060C2F6 /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
+		90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ExerciseSet.swift; sourceTree = "<group>"; };
 		90F0CFB828A6A0C900864973 /* SportTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F0CFBB28A6A0C900864973 /* SportTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTimerApp.swift; sourceTree = "<group>"; };
 		90F0CFBD28A6A0C900864973 /* V_AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_AppView.swift; sourceTree = "<group>"; };
@@ -155,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				90F0CFED28A6A34000864973 /* M_Exercise.swift */,
-				90E6745F29E433DC0060C2F6 /* ExerciseSet.swift */,
+				90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				90F0CFBD28A6A0C900864973 /* V_AppView.swift */,
+				900E84D629E47E2D001D4D6C /* V_CreateNewExerciseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,9 +323,10 @@
 				90F0CFEE28A6A34000864973 /* M_Exercise.swift in Sources */,
 				90E6745E29E431220060C2F6 /* MVC_ExerciseChooser.swift in Sources */,
 				90F0CFBE28A6A0C900864973 /* V_AppView.swift in Sources */,
-				90E6746029E433DC0060C2F6 /* ExerciseSet.swift in Sources */,
+				90E6746029E433DC0060C2F6 /* M_ExerciseSet.swift in Sources */,
 				90F0CFBC28A6A0C900864973 /* SportTimerApp.swift in Sources */,
 				90F0CFE828A6A15600864973 /* MVC_TimeManager.swift in Sources */,
+				900E84D729E47E2D001D4D6C /* V_CreateNewExerciseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +493,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -518,6 +523,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
