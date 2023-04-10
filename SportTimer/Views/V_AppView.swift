@@ -11,7 +11,9 @@ import AVFoundation
 
 struct AppView: View {
    
-    @ObservedObject var timerManager = TimerManager(exerciseTimer: ExerciseTimer())
+    @StateObject var timerManager = TimerManager()
+    @StateObject var exerciseChooser = ExerciseChooser(named: "excerciseChooser")
+    
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -36,7 +38,7 @@ struct AppView: View {
                 .frame(width: 180, height: 180)
                 .foregroundColor(constants.themeColor)
                 .onTapGesture {
-                    timerManager.hasStartedExercise = true
+                    timerManager.startExercise(with: exerciseChooser.getExerciseSet())
                 }
             Spacer()
             Text("Press button to start Training")

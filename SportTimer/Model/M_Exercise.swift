@@ -8,14 +8,11 @@
 import Foundation
 
 ///This struct represents an Exercise
-struct Exercise {
+struct Exercise: Codable {
     let name: String
     let isPause: Bool
     private(set) var durationInSeconds: Double
     
-    mutating func setNewDuration(to duration: Double) {
-        self.durationInSeconds = duration
-    }
     
 }
 

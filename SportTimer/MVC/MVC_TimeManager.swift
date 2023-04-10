@@ -12,7 +12,7 @@ import AVFoundation
 ///This class handles the process of working with the exercise data
 class TimerManager: ObservableObject {
     
-    @Published var exerciseTimer: ExerciseTimer
+    @Published var exerciseSet: ExerciseSet
     @Published var currentExercise : Exercise
     @Published var hasStartedExercise = false
     @Published var remainingTime: Double
@@ -21,19 +21,15 @@ class TimerManager: ObservableObject {
     var exerciseCount = 1
     
     //Give an ExerciseTimer which contains the ordered array(first exercise at array[0]) with the exercises
-    init(exerciseTimer: ExerciseTimer) {
-        self.exerciseTimer = exerciseTimer
-        //Check that exercises are not empty
-        if let firstExercise = exerciseTimer.exercises.first {
-            currentExercise = firstExercise
-            remainingTime = firstExercise.durationInSeconds
-        } else {
-            currentExercise = Exercise(name: "Dummy",isPause: false, durationInSeconds: 0)
-            remainingTime = 0
-        }
+    init() {
+        self.exerciseSet = ExerciseSet(name: "dummy", exercises: [Exercise(name: "Dummy",isPause: false, durationInSeconds: 1)])
+        currentExercise = Exercise(name: "Dummy",isPause: false, durationInSeconds: 1)
+        hasStartedExercise = false
+        remainingTime = 0
     }
     
-    func startExercise() {
+    func startExercise(with set: ExerciseSet) {
+        exerciseSet = set
         hasStartedExercise = true
     }
     
@@ -43,13 +39,13 @@ class TimerManager: ObservableObject {
     ///If the end of the array is reached
     func setToNextExercise() {
         playSound(wasPause: currentExercise.isPause)
-        if(exerciseCount < exerciseTimer.exercises.count) {
-            currentExercise = exerciseTimer.exercises[exerciseCount]
+        if(exerciseCount < exerciseSet.exercises.count) {
+            currentExercise = exerciseSet.exercises[exerciseCount]
         } else {
             //Set back to default value that are the same as in the init()
             hasStartedExercise = false
             exerciseCount = 1
-            if let firstExercise = exerciseTimer.exercises.first {
+            if let firstExercise = exerciseSet.exercises.first {
                 currentExercise = firstExercise
                 remainingTime = firstExercise.durationInSeconds
             } else {
@@ -67,8 +63,8 @@ class TimerManager: ObservableObject {
     }
     
     func showNextExerciseName() -> String {
-        if exerciseCount < exerciseTimer.exercises.count {
-            return exerciseTimer.exercises[exerciseCount].name
+        if exerciseCount < exerciseSet.exercises.count {
+            return exerciseSet.exercises[exerciseCount].name
         }
         return "This is the last Exercise"
     }
@@ -76,7 +72,7 @@ class TimerManager: ObservableObject {
     func resetExerciseProgramToStart() {
         hasStartedExercise = false
         exerciseCount = 1
-        if let firstExercise = exerciseTimer.exercises.first {
+        if let firstExercise = exerciseSet.exercises.first {
             currentExercise = firstExercise
             remainingTime = firstExercise.durationInSeconds
         } else {
