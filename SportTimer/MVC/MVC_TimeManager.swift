@@ -17,6 +17,7 @@ class TimerManager: ObservableObject {
     @Published var hasStartedExercise = false
     @Published var remainingTime: Double
     
+    
     private var player: AVAudioPlayer!
     var exerciseCount = 1
     
@@ -28,8 +29,10 @@ class TimerManager: ObservableObject {
         remainingTime = 0
     }
     
-    func startExercise(with set: ExerciseSet) {
+    func startExercise(set: ExerciseSet) {
         exerciseSet = set
+        currentExercise = exerciseSet.exercises.first!
+        remainingTime = exerciseSet.exercises.first!.durationInSeconds
         hasStartedExercise = true
     }
     

@@ -38,7 +38,9 @@ struct AppView: View {
                 .frame(width: 180, height: 180)
                 .foregroundColor(constants.themeColor)
                 .onTapGesture {
-                    timerManager.startExercise(with: exerciseChooser.getExerciseSet())
+                    withAnimation {
+                        timerManager.startExercise(set: exerciseChooser.getExerciseSet())
+                    }
                 }
             Spacer()
             Text("Press button to start Training")
@@ -114,7 +116,10 @@ struct AppView: View {
                         .font(.subheadline)
                 }.padding()
             .onTapGesture {
-            timerManager.resetExerciseProgramToStart()
+                withAnimation {
+                    timerManager.resetExerciseProgramToStart()
+                }
+
             }.foregroundColor(constants.themeColor)
     }
     
