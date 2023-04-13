@@ -20,6 +20,32 @@ class ExerciseChooser: ObservableObject {
     
     private var userDefaultsKey: String {"ExerciseSetStore"}
     
+    init(named name: String) {
+        self.name = name
+        //restoreFromUserDefaults()
+        if exerciseSets.isEmpty {
+            exerciseSets.append(createDefaultExerciseSet())
+            exerciseSets.append(createDefaultExerciseSet2())
+        }
+    }
+    
+    
+    func getSelectedExerciseSet() -> ExerciseSet {
+        if currentExerciseSetPosition < exerciseSets.count {
+            return exerciseSets[currentExerciseSetPosition]
+        }
+        return exerciseSets[0]
+    }
+    
+    func chooseExerciseSet(exerciseSet: ExerciseSet) {
+        if let position = exerciseSets.firstIndex(of: exerciseSet) {
+            currentExerciseSetPosition = position
+        } else {
+            currentExerciseSetPosition = 0
+        }
+    }
+    
+    
     private func storeInUserDefaults() {
         UserDefaults.standard.set(try? JSONEncoder().encode(exerciseSets), forKey: userDefaultsKey)
     }
@@ -31,27 +57,7 @@ class ExerciseChooser: ObservableObject {
         }
     }
     
-    init(named name: String) {
-        self.name = name
-        //restoreFromUserDefaults()
-        if exerciseSets.isEmpty {
-            exerciseSets.append(createDefaultExerciseSet())
-            exerciseSets.append(createDefaultExerciseSet2())
-        }
-    }
-    
-    func getExerciseSet() -> ExerciseSet {
-        return exerciseSets[0];
-    }
-    
-    func getSelectedExerciseSet() -> ExerciseSet {
-        if currentExerciseSetPosition < exerciseSets.count {
-            return exerciseSets[currentExerciseSetPosition]
-        }
-        return exerciseSets[0]
-    }
-    
-    func generateUniqueID() -> Int {
+    private func generateUniqueID() -> Int {
         //1.) Get all existing IDs
         let existingIDs = getExistingIDs()
         //2.) Find an ID that does not exist yet

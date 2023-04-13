@@ -14,7 +14,9 @@ struct V_AvailableExercises: View {
     var body: some View {
         ScrollView {
             ForEach(exerciseChooser.exerciseSets) { exerciseSet in
-                Text(exerciseSet.name)
+                Button(exerciseSet.name) {
+                    exerciseChooser.chooseExerciseSet(exerciseSet: exerciseSet)
+                }
             }
         }
     }

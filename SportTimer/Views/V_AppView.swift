@@ -62,7 +62,7 @@ struct AppView: View {
                 .foregroundColor(constants.themeColor)
                 .onTapGesture {
                     withAnimation {
-                        timerManager.startExercise(set: exerciseChooser.getExerciseSet())
+                        timerManager.startExercise(set: exerciseChooser.getSelectedExerciseSet())
                     }
                 }
             Spacer()
