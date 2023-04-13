@@ -23,7 +23,7 @@ class TimerManager: ObservableObject {
     
     //Give an ExerciseTimer which contains the ordered array(first exercise at array[0]) with the exercises
     init() {
-        self.exerciseSet = ExerciseSet(name: "dummy", exercises: [Exercise(name: "Dummy",isPause: false, durationInSeconds: 1)])
+        self.exerciseSet = ExerciseSet(id: 2_147_483_600, name: "dummy", exercises: [Exercise(name: "Dummy",isPause: false, durationInSeconds: 1)])
         currentExercise = Exercise(name: "Dummy",isPause: false, durationInSeconds: 1)
         hasStartedExercise = false
         remainingTime = 0

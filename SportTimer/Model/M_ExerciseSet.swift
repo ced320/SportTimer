@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ExerciseSet : Codable {
+struct ExerciseSet : Codable, Identifiable {
+    var id: Int
     var name: String
     var exercises: [Exercise]
 }
