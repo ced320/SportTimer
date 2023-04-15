@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		900E84D729E47E2D001D4D6C /* V_CreateNewExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E84D629E47E2D001D4D6C /* V_CreateNewExerciseView.swift */; };
+		901B9F9629EAABB70081032F /* V_CreateExerciseSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9529EAABB70081032F /* V_CreateExerciseSetView.swift */; };
+		901B9F9829EAB4210081032F /* V_CreateExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */; };
+		901B9F9A29EAB4C90081032F /* MVC_ExerciseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9929EAB4C90081032F /* MVC_ExerciseCreate.swift */; };
 		90B2198029E8071E00E0DAD7 /* V_AvailableExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */; };
 		90E6745E29E431220060C2F6 /* MVC_ExerciseChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */; };
 		90E6746029E433DC0060C2F6 /* M_ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */; };
@@ -42,7 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		900E84D629E47E2D001D4D6C /* V_CreateNewExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_CreateNewExerciseView.swift; sourceTree = "<group>"; };
+		901B9F9529EAABB70081032F /* V_CreateExerciseSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_CreateExerciseSetView.swift; sourceTree = "<group>"; };
+		901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_CreateExerciseView.swift; sourceTree = "<group>"; };
+		901B9F9929EAB4C90081032F /* MVC_ExerciseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseCreate.swift; sourceTree = "<group>"; };
 		90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_AvailableExercises.swift; sourceTree = "<group>"; };
 		90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseChooser.swift; sourceTree = "<group>"; };
 		90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ExerciseSet.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 			children = (
 				90F0CFE728A6A15600864973 /* MVC_TimeManager.swift */,
 				90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */,
+				901B9F9929EAB4C90081032F /* MVC_ExerciseCreate.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -168,8 +173,9 @@
 			isa = PBXGroup;
 			children = (
 				90F0CFBD28A6A0C900864973 /* V_AppView.swift */,
-				900E84D629E47E2D001D4D6C /* V_CreateNewExerciseView.swift */,
 				90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */,
+				901B9F9529EAABB70081032F /* V_CreateExerciseSetView.swift */,
+				901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,13 +329,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				901B9F9829EAB4210081032F /* V_CreateExerciseView.swift in Sources */,
+				901B9F9629EAABB70081032F /* V_CreateExerciseSetView.swift in Sources */,
 				90F0CFEE28A6A34000864973 /* M_Exercise.swift in Sources */,
 				90E6745E29E431220060C2F6 /* MVC_ExerciseChooser.swift in Sources */,
 				90F0CFBE28A6A0C900864973 /* V_AppView.swift in Sources */,
 				90E6746029E433DC0060C2F6 /* M_ExerciseSet.swift in Sources */,
 				90F0CFBC28A6A0C900864973 /* SportTimerApp.swift in Sources */,
+				901B9F9A29EAB4C90081032F /* MVC_ExerciseCreate.swift in Sources */,
 				90F0CFE828A6A15600864973 /* MVC_TimeManager.swift in Sources */,
-				900E84D729E47E2D001D4D6C /* V_CreateNewExerciseView.swift in Sources */,
 				90B2198029E8071E00E0DAD7 /* V_AvailableExercises.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

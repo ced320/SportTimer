@@ -29,6 +29,13 @@ class ExerciseChooser: ObservableObject {
         }
     }
     
+    func createExerciseSet(nameOfExerciseSet: String, exercises: [Exercise]) {
+        //1.) Create an Exercise Set with an unique id
+        let exerciseSet = ExerciseSet(id: generateUniqueID(), name: nameOfExerciseSet, exercises: exercises)
+        //2.) Add that ExerciseSet to the existing ExerciseSets
+        exerciseSets.append(exerciseSet)
+    }
+    
     
     func getSelectedExerciseSet() -> ExerciseSet {
         if currentExerciseSetPosition < exerciseSets.count {
@@ -125,6 +132,87 @@ class ExerciseChooser: ObservableObject {
         exercises.append(Exercise(name: "2SQUAD",isPause: false, durationInSeconds: 30))
         exercises.append(pause15Sec)
         exercises.append(Exercise(name: "2HANDS TO GROUND",isPause: false, durationInSeconds: 30))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "2SITTING",isPause: false, durationInSeconds: 35))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "2RIGHT KNEE TO WALL",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2LEFT KNEE TO WALL",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2HANDS TO TABLE",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2TABLE",isPause: false, durationInSeconds: 45))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2SQUAD",isPause: false, durationInSeconds: 30))
+        
+        return ExerciseSet(id: generateUniqueID(), name: "test2", exercises: exercises)
+    }
+    
+    private func createDefaultExerciseSet3() -> ExerciseSet {
+        
+        let pause5Sec = Exercise(name: "3Pause",isPause: true, durationInSeconds: 5)
+        let pause10Sec = Exercise(name: "3Pause",isPause: true, durationInSeconds: 10)
+        let pause15Sec = Exercise(name: "3Pause",isPause: true, durationInSeconds: 15)
+        
+        var exercises = [Exercise]()
+        exercises.append(pause5Sec)
+        exercises.append(Exercise(name: "3SQUAD",isPause: false, durationInSeconds: 30))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "3HANDS TO GROUND",isPause: false, durationInSeconds: 30))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "2SITTING",isPause: false, durationInSeconds: 35))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "2RIGHT KNEE TO WALL",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2LEFT KNEE TO WALL",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2HANDS TO TABLE",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2TABLE",isPause: false, durationInSeconds: 45))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2SQUAD",isPause: false, durationInSeconds: 30))
+        
+        return ExerciseSet(id: generateUniqueID(), name: "test2", exercises: exercises)
+    }
+    
+    private func createDefaultExerciseSet4() -> ExerciseSet {
+        
+        let pause5Sec = Exercise(name: "4Pause",isPause: true, durationInSeconds: 5)
+        let pause10Sec = Exercise(name: "4Pause",isPause: true, durationInSeconds: 10)
+        let pause15Sec = Exercise(name: "4Pause",isPause: true, durationInSeconds: 15)
+        
+        var exercises = [Exercise]()
+        exercises.append(pause5Sec)
+        exercises.append(Exercise(name: "4SQUAD",isPause: false, durationInSeconds: 30))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "4HANDS TO GROUND",isPause: false, durationInSeconds: 30))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "4SITTING",isPause: false, durationInSeconds: 35))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "4RIGHT KNEE TO WALL",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2LEFT KNEE TO WALL",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2HANDS TO TABLE",isPause: false, durationInSeconds: 30))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2TABLE",isPause: false, durationInSeconds: 45))
+        exercises.append(pause10Sec)
+        exercises.append(Exercise(name: "2SQUAD",isPause: false, durationInSeconds: 30))
+        
+        return ExerciseSet(id: generateUniqueID(), name: "test2", exercises: exercises)
+    }
+    
+    private func createDefaultExerciseSet5() -> ExerciseSet {
+        
+        let pause5Sec = Exercise(name: "5Pause",isPause: true, durationInSeconds: 5)
+        let pause10Sec = Exercise(name: "5Pause",isPause: true, durationInSeconds: 10)
+        let pause15Sec = Exercise(name: "5Pause",isPause: true, durationInSeconds: 15)
+        
+        var exercises = [Exercise]()
+        exercises.append(pause5Sec)
+        exercises.append(Exercise(name: "5SQUAD",isPause: false, durationInSeconds: 30))
+        exercises.append(pause15Sec)
+        exercises.append(Exercise(name: "5HANDS TO GROUND",isPause: false, durationInSeconds: 30))
         exercises.append(pause15Sec)
         exercises.append(Exercise(name: "2SITTING",isPause: false, durationInSeconds: 35))
         exercises.append(pause15Sec)

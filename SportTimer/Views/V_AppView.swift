@@ -39,7 +39,8 @@ struct AppView: View {
                 }
                 Spacer()
                 NavigationLink("Create Exercise") {
-                    Text("To be implemented!")
+                   CreateExerciseSet()
+                        .environmentObject(exerciseChooser)
                 }
                 Spacer()
             }
