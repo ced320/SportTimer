@@ -12,19 +12,36 @@ struct V_CreateExerciseView2: View {
     @EnvironmentObject var exerciseChooser: ExerciseChooser
     @EnvironmentObject var exerciseCreate: MVC_ExerciseCreate
     
+    //@FocusState var showKeyboard: Bool
+    
+    @State var nameOfExercise: String = "Exercise1"
+    @State var durationOfExercise: Double = 30
+    @State var durationOfPause: Double = 10
+    
     var body: some View {
         VStack {
             List {
-                //TextField("Name", text: $exerciseChooser.name)
-                Text("GiveName")
-                Text("name of exercise")
-                Text("duration in seconds")
-                Text("isPause").onTapGesture {
-                    exerciseCreate.testPrint()
-                }
+                TextField("Name", text: $nameOfExercise)
+                TextField("durationOfExercise", value: $durationOfExercise, format: .number)
+                TextField("durationOfPause", value: $durationOfPause, format: .number)
             }
             Button("Add exercise to set") {
-                exerciseCreate.testPrint()
+                exerciseCreate.addInputToExerciseSet(existingExerciseSets: exerciseChooser.exerciseSets, name: nameOfExercise, duration: durationOfExercise, pauseDuration: durationOfPause)
+                exerciseCreate.printAllAddedExercises()
+                print("+++++++")
+                exerciseCreate.printAllExerciseSets(existingExerciseSets: exerciseChooser.exerciseSets)
+                
+            }
+            addedExercise
+        }
+    }
+    
+    var addedExercise: some View {
+        ScrollView {
+            ForEach(exerciseCreate.temporaryCreatedExercises) { exercise in
+                VStack {
+                    Text(exercise.name)
+                }
             }
         }
     }

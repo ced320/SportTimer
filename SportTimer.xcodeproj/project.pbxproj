@@ -10,6 +10,9 @@
 		901B9F9629EAABB70081032F /* V_CreateExerciseSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9529EAABB70081032F /* V_CreateExerciseSetView.swift */; };
 		901B9F9829EAB4210081032F /* V_CreateExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */; };
 		901B9F9A29EAB4C90081032F /* MVC_ExerciseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9929EAB4C90081032F /* MVC_ExerciseCreate.swift */; };
+		901B9F9C29EAD9760081032F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9B29EAD9760081032F /* Utilities.swift */; };
+		901B9F9E29EBF8090081032F /* V_HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9D29EBF8090081032F /* V_HomeView.swift */; };
+		901B9FA029EBFD610081032F /* M_ExercisesForTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9F29EBFD610081032F /* M_ExercisesForTimer.swift */; };
 		90B2198029E8071E00E0DAD7 /* V_AvailableExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */; };
 		90E6745E29E431220060C2F6 /* MVC_ExerciseChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */; };
 		90E6746029E433DC0060C2F6 /* M_ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */; };
@@ -20,7 +23,6 @@
 		90F0CFCD28A6A0CB00864973 /* SportTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0CFCC28A6A0CB00864973 /* SportTimerTests.swift */; };
 		90F0CFD728A6A0CB00864973 /* SportTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0CFD628A6A0CB00864973 /* SportTimerUITests.swift */; };
 		90F0CFD928A6A0CB00864973 /* SportTimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0CFD828A6A0CB00864973 /* SportTimerUITestsLaunchTests.swift */; };
-		90F0CFE828A6A15600864973 /* MVC_TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0CFE728A6A15600864973 /* MVC_TimeManager.swift */; };
 		90F0CFEE28A6A34000864973 /* M_Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F0CFED28A6A34000864973 /* M_Exercise.swift */; };
 		90F0CFF528A6D7A600864973 /* singleBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90F0CFF428A6D7A600864973 /* singleBeep.mp3 */; };
 		90F0CFF728A6D7B100864973 /* doubleBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90F0CFF628A6D7B100864973 /* doubleBeep.mp3 */; };
@@ -47,6 +49,9 @@
 		901B9F9529EAABB70081032F /* V_CreateExerciseSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_CreateExerciseSetView.swift; sourceTree = "<group>"; };
 		901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_CreateExerciseView.swift; sourceTree = "<group>"; };
 		901B9F9929EAB4C90081032F /* MVC_ExerciseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseCreate.swift; sourceTree = "<group>"; };
+		901B9F9B29EAD9760081032F /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		901B9F9D29EBF8090081032F /* V_HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_HomeView.swift; sourceTree = "<group>"; };
+		901B9F9F29EBFD610081032F /* M_ExercisesForTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ExercisesForTimer.swift; sourceTree = "<group>"; };
 		90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_AvailableExercises.swift; sourceTree = "<group>"; };
 		90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseChooser.swift; sourceTree = "<group>"; };
 		90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ExerciseSet.swift; sourceTree = "<group>"; };
@@ -60,7 +65,6 @@
 		90F0CFD228A6A0CB00864973 /* SportTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SportTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F0CFD628A6A0CB00864973 /* SportTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTimerUITests.swift; sourceTree = "<group>"; };
 		90F0CFD828A6A0CB00864973 /* SportTimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		90F0CFE728A6A15600864973 /* MVC_TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_TimeManager.swift; sourceTree = "<group>"; };
 		90F0CFED28A6A34000864973 /* M_Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = M_Exercise.swift; sourceTree = "<group>"; };
 		90F0CFF428A6D7A600864973 /* singleBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = singleBeep.mp3; sourceTree = "<group>"; };
 		90F0CFF628A6D7B100864973 /* doubleBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = doubleBeep.mp3; sourceTree = "<group>"; };
@@ -153,7 +157,6 @@
 		90F0CFE928A6A28B00864973 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
-				90F0CFE728A6A15600864973 /* MVC_TimeManager.swift */,
 				90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */,
 				901B9F9929EAB4C90081032F /* MVC_ExerciseCreate.swift */,
 			);
@@ -165,6 +168,8 @@
 			children = (
 				90F0CFED28A6A34000864973 /* M_Exercise.swift */,
 				90E6745F29E433DC0060C2F6 /* M_ExerciseSet.swift */,
+				901B9F9B29EAD9760081032F /* Utilities.swift */,
+				901B9F9F29EBFD610081032F /* M_ExercisesForTimer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 				90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */,
 				901B9F9529EAABB70081032F /* V_CreateExerciseSetView.swift */,
 				901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */,
+				901B9F9D29EBF8090081032F /* V_HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,13 +337,15 @@
 			files = (
 				901B9F9829EAB4210081032F /* V_CreateExerciseView.swift in Sources */,
 				901B9F9629EAABB70081032F /* V_CreateExerciseSetView.swift in Sources */,
+				901B9FA029EBFD610081032F /* M_ExercisesForTimer.swift in Sources */,
+				901B9F9C29EAD9760081032F /* Utilities.swift in Sources */,
 				90F0CFEE28A6A34000864973 /* M_Exercise.swift in Sources */,
+				901B9F9E29EBF8090081032F /* V_HomeView.swift in Sources */,
 				90E6745E29E431220060C2F6 /* MVC_ExerciseChooser.swift in Sources */,
 				90F0CFBE28A6A0C900864973 /* V_AppView.swift in Sources */,
 				90E6746029E433DC0060C2F6 /* M_ExerciseSet.swift in Sources */,
 				90F0CFBC28A6A0C900864973 /* SportTimerApp.swift in Sources */,
 				901B9F9A29EAB4C90081032F /* MVC_ExerciseCreate.swift in Sources */,
-				90F0CFE828A6A15600864973 /* MVC_TimeManager.swift in Sources */,
 				90B2198029E8071E00E0DAD7 /* V_AvailableExercises.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
