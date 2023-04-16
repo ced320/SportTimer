@@ -10,7 +10,6 @@ import SwiftUI
 struct CreateExerciseSet: View {
     
     @EnvironmentObject var exerciseChooser: ExerciseChooser
-    @StateObject var exerciseCreate: MVC_ExerciseCreate = MVC_ExerciseCreate()
     
     @State var testSaver1: String = "empty1"
     @State var testSaver2: String = "empty2"
@@ -42,8 +41,8 @@ struct CreateExerciseSet: View {
     var exerciseSection: some View {
 
         V_CreateExerciseView2()
-            .environmentObject(exerciseCreate)
             .environmentObject(exerciseChooser)
+            
     }
 }
 

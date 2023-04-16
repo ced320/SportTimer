@@ -10,7 +10,6 @@ import SwiftUI
 struct V_CreateExerciseView2: View {
     
     @EnvironmentObject var exerciseChooser: ExerciseChooser
-    @EnvironmentObject var exerciseCreate: MVC_ExerciseCreate
     
     //@FocusState var showKeyboard: Bool
     
@@ -26,10 +25,10 @@ struct V_CreateExerciseView2: View {
                 TextField("durationOfPause", value: $durationOfPause, format: .number)
             }
             Button("Add exercise to set") {
-                exerciseCreate.addInputToExerciseSet(existingExerciseSets: exerciseChooser.exerciseSets, name: nameOfExercise, duration: durationOfExercise, pauseDuration: durationOfPause)
-                exerciseCreate.printAllAddedExercises()
+                exerciseChooser.addInputToExerciseSet(name: nameOfExercise, duration: durationOfExercise, pauseDuration: durationOfPause)
+                exerciseChooser.printAllAddedExercises()
                 print("+++++++")
-                exerciseCreate.printAllExerciseSets(existingExerciseSets: exerciseChooser.exerciseSets)
+                exerciseChooser.printAllExerciseSets(existingExerciseSets: exerciseChooser.exerciseSets)
                 
             }
             addedExercise
@@ -38,7 +37,7 @@ struct V_CreateExerciseView2: View {
     
     var addedExercise: some View {
         ScrollView {
-            ForEach(exerciseCreate.temporaryCreatedExercises) { exercise in
+            ForEach(exerciseChooser.temporaryCreatedExercises) { exercise in
                 VStack {
                     Text(exercise.name)
                 }

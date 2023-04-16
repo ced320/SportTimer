@@ -15,6 +15,7 @@ class ExerciseChooser: ObservableObject {
             storeInUserDefaults()
         }
     }
+    @Published var temporaryCreatedExercises: [Exercise] = [Exercise]()
     @Published private(set) var exerciseIDs = [Int]()
     @Published private(set) var exerciseSetIDs = [Int]()
     @Published private(set) var currentExerciseSetPosition = 0
@@ -155,6 +156,47 @@ class ExerciseChooser: ObservableObject {
         if let jsonData = UserDefaults.standard.data(forKey: userDefaultsKey),
            let decodedExercisesSets = try? JSONDecoder().decode(Array<ExerciseSet>.self, from: jsonData) {
             exerciseSets = decodedExercisesSets
+        }
+    }
+    
+    func printAllAddedExercises() {
+        for exercise in temporaryCreatedExercises {
+            print(exercise.name)
+            print(exercise.durationInSeconds)
+            print("---------")
+        }
+    }
+    
+    private func stringExerciseToExerciseStruct(name: String, duration: Double) -> Exercise {
+        if duration < 0.1 {
+            return createNewExercise(name: name, isPause: false, durationInSeconds: 0.1)
+        }
+        return createNewExercise(name: name, isPause: false, durationInSeconds: duration)
+    }
+    
+    private func stringPauseToExerciseStruct(duration: Double) -> Exercise {
+        if duration < 0.1 {
+            return createNewExercise(name: "Pause", isPause: true, durationInSeconds: 0.1)
+        }
+        return createNewExercise(name: "Pause", isPause: true, durationInSeconds: duration)
+    }
+    
+    func addInputToExerciseSet(name: String, duration: Double, pauseDuration: Double) {
+        let exercise = stringExerciseToExerciseStruct(name: name, duration: duration)
+        let pause = stringPauseToExerciseStruct(duration: pauseDuration)
+        
+        temporaryCreatedExercises.append(exercise)
+        temporaryCreatedExercises.append(pause)
+    }
+    
+    func printAllExerciseSets(existingExerciseSets: [ExerciseSet]) {
+        for existingExerciseSet in existingExerciseSets {
+            let exercises = existingExerciseSet.exercises
+            for exercise in exercises {
+                print(exercise.name)
+                print(exercise.id)
+                print(exercise.durationInSeconds)
+            }
         }
     }
     
