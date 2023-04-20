@@ -13,7 +13,7 @@ struct V_CreateExerciseView2: View {
     
     //@FocusState var showKeyboard: Bool
     
-    @State var nameOfExercise: String = "Exercise1"
+    @State var nameOfExercise: String = ""
     @State var durationOfExercise: Double = 30
     @State var durationOfPause: Double = 10
     
@@ -31,19 +31,11 @@ struct V_CreateExerciseView2: View {
                 exerciseChooser.printAllExerciseSets(existingExerciseSets: exerciseChooser.exerciseSets)
                 
             }
-            addedExercise
+            V_addedExerciseView()
+                .environmentObject(exerciseChooser)
         }
     }
     
-    var addedExercise: some View {
-        ScrollView {
-            ForEach(exerciseChooser.temporaryCreatedExercises) { exercise in
-                VStack {
-                    Text(exercise.name)
-                }
-            }
-        }
-    }
 }
 
 struct V_CreateExerciseView2_Previews: PreviewProvider {

@@ -11,12 +11,7 @@ struct CreateExerciseSet: View {
     
     @EnvironmentObject var exerciseChooser: ExerciseChooser
     
-    @State var testSaver1: String = "empty1"
-    @State var testSaver2: String = "empty2"
-    @State var testSaver3: String = "empty3"
-    @State var testSaver4: String = "empty4"
-    
-    
+    @State var testSaver1: String = ""
     
     var body: some View {
 
@@ -30,12 +25,20 @@ struct CreateExerciseSet: View {
                         exerciseSection
                     }
                 }
+                Section("Create ExerciseSet") {
+                    createExerciseSection
+                }
+                Section("Exercise added") {
+                    V_addedExerciseView()
+                        .environmentObject(exerciseChooser)
+                }
             }
         }
     }
     
     var nameSection: some View {
-            TextField("---", text: $testSaver1)
+        TextField("Type name of set here", text: $testSaver1)
+            //TextField("---", text: $testSaver1)
     }
     
     var exerciseSection: some View {
@@ -43,6 +46,22 @@ struct CreateExerciseSet: View {
         V_CreateExerciseView2()
             .environmentObject(exerciseChooser)
             
+    }
+    
+    @ViewBuilder
+    var createExerciseSection: some View {
+        if testSaver1 != "" && exerciseChooser.exerciseSetBuilder.temporaryCreatedExercises.count != 0 {
+            Button("Create exercise-set") {
+                withAnimation {
+                    exerciseChooser.createExerciseSet(nameOfExerciseSet: testSaver1)
+                }
+            }
+        }
+        else {
+            Button("Can not create Exercise set without name or exercises") {
+            }
+        }
+
     }
 }
 

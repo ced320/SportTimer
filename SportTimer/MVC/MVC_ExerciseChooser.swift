@@ -15,7 +15,7 @@ class ExerciseChooser: ObservableObject {
             storeInUserDefaults()
         }
     }
-    @Published var temporaryCreatedExercises: [Exercise] = [Exercise]()
+    @Published var exerciseSetBuilder = ExerciseSetBuilder()
     @Published private(set) var exerciseIDs = [Int]()
     @Published private(set) var exerciseSetIDs = [Int]()
     @Published private(set) var currentExerciseSetPosition = 0
@@ -30,8 +30,8 @@ class ExerciseChooser: ObservableObject {
     init(named name: String) {
         self.name = name
         self.currentExerciseSetPosition = 0
-        //self.lastUsedExerciseSet = 0
-        //restoreFromUserDefaults()
+        //deleteUserDefaults()
+        restoreFromUserDefaults()
         if exerciseSets.isEmpty {
             exerciseSets.append(createDefaultExerciseSet())
             exerciseSets.append(createDefaultExerciseSet2())
@@ -124,12 +124,18 @@ class ExerciseChooser: ObservableObject {
         return exercise
     }
     
-    func createExerciseSet(nameOfExerciseSet: String, exercises: [Exercise]) {
+    func createExerciseSet(nameOfExerciseSet: String) {
+        if(nameOfExerciseSet == "") {
+            return
+        }
         //1.) Create an Exercise Set with an unique id
-        let exerciseSet = ExerciseSet(exerciseSets: exerciseSets, name: nameOfExerciseSet, exercises: exercises)
-        //2.) Add that ExerciseSet to the existing ExerciseSets
-        exerciseSets.append(exerciseSet)
+        exerciseSetBuilder.setNameOfExerciseSet(nameOfExerciseSetToBuild: nameOfExerciseSet)
+        if let exerciseSet = exerciseSetBuilder.createExerciseSetWithGivenInput(exerciseSets: exerciseSets) {
+            //2.) Add that ExerciseSet to the existing ExerciseSets if it can be created
+            exerciseSets.append(exerciseSet)
+        }
     }
+    
     
     
     func getSelectedExerciseSet() -> ExerciseSet {
@@ -152,6 +158,12 @@ class ExerciseChooser: ObservableObject {
         UserDefaults.standard.set(try? JSONEncoder().encode(exerciseSets), forKey: userDefaultsKey)
     }
     
+    private func deleteUserDefaults() {
+        let prefs = UserDefaults.standard
+        //let keyValue = prefs.string(forKey: "ExerciseSetStore")
+        prefs.removeObject(forKey: "ExerciseSetStore")
+    }
+    
     private func restoreFromUserDefaults() {
         if let jsonData = UserDefaults.standard.data(forKey: userDefaultsKey),
            let decodedExercisesSets = try? JSONDecoder().decode(Array<ExerciseSet>.self, from: jsonData) {
@@ -159,8 +171,9 @@ class ExerciseChooser: ObservableObject {
         }
     }
     
+    
     func printAllAddedExercises() {
-        for exercise in temporaryCreatedExercises {
+        for exercise in exerciseSetBuilder.temporaryCreatedExercises {
             print(exercise.name)
             print(exercise.durationInSeconds)
             print("---------")
@@ -182,11 +195,14 @@ class ExerciseChooser: ObservableObject {
     }
     
     func addInputToExerciseSet(name: String, duration: Double, pauseDuration: Double) {
-        let exercise = stringExerciseToExerciseStruct(name: name, duration: duration)
-        let pause = stringPauseToExerciseStruct(duration: pauseDuration)
         
-        temporaryCreatedExercises.append(exercise)
-        temporaryCreatedExercises.append(pause)
+        if name != "" && duration > 0 && pauseDuration > 0 {
+            let exercise = stringExerciseToExerciseStruct(name: name, duration: duration)
+            let pause = stringPauseToExerciseStruct(duration: pauseDuration)
+            
+            exerciseSetBuilder.temporaryCreatedExercises.append(exercise)
+            exerciseSetBuilder.temporaryCreatedExercises.append(pause)
+        }
     }
     
     func printAllExerciseSets(existingExerciseSets: [ExerciseSet]) {
