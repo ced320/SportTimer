@@ -58,8 +58,7 @@ struct CreateExerciseSet: View {
             }
         }
         else {
-            Button("Can not create Exercise set without name or exercises") {
-            }
+            Text("Add name for set and/or exercises!")
         }
 
     }
