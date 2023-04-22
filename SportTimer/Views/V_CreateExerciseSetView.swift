@@ -12,28 +12,36 @@ struct CreateExerciseSet: View {
     @EnvironmentObject var exerciseChooser: ExerciseChooser
     
     @State var testSaver1: String = ""
+    @State var showWarning = false
     
     var body: some View {
 
         NavigationStack {
             Form {
+                resetExercisesCreated
                 Section("Name of ExerciseSet") {
                     nameSection
                 }
                 Section("Add Exercise") {
-                    NavigationLink("Create single exercise") {
+                    NavigationLink("Add new Exercise") {
                         exerciseSection
                     }
                 }
-                Section("Create ExerciseSet") {
-                    createExerciseSection
-                }
+                createExerciseSection
                 Section("Exercise added") {
                     V_addedExerciseView()
                         .environmentObject(exerciseChooser)
                 }
             }
         }
+    }
+    
+    var resetExercisesCreated: some View {
+        Button("Reset created Exercises") {
+            withAnimation {
+                exerciseChooser.resetTemporaryCreatedExercises()
+            }
+        }.foregroundColor(.red)
     }
     
     var nameSection: some View {
@@ -58,10 +66,18 @@ struct CreateExerciseSet: View {
             }
         }
         else {
-            Text("Add name for set and/or exercises!")
+            Button("Add exercise-set-name and/or exercises first!") {
+                showWarning = true
+            }
+            .foregroundColor(.red)
+            .opacity(0.7)
+            .alert("Add exercise-set-name and/or exercises first!", isPresented: $showWarning) {
+            }
         }
 
     }
+
+
 }
 
 struct CreateExerciseView_Previews: PreviewProvider {

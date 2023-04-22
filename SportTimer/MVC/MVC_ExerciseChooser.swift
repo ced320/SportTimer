@@ -47,16 +47,6 @@ class ExerciseChooser: ObservableObject {
         }
     }
     
-    private func setTimerManager(toSetNumber num: Int) {
-        if num < exerciseSets.count && exerciseSets[num].exercises.count != 0 && exerciseSets[num].exercises.first != nil {
-            currentExerciseSetPosition = num
-            timerManager!.currentExercise = exerciseSets[num].exercises.first!
-            timerManager!.exerciseSet = exerciseSets[num]
-            timerManager!.hasStartedExercise = false
-            timerManager!.remainingTime = exerciseSets[num].exercises.first!.durationInSeconds
-            
-        }
-    }
     func startExercise(withSetNumber setNum: Int) {
         setTimerManager(toSetNumber: setNum)
         timerManager!.hasStartedExercise = true
@@ -66,6 +56,10 @@ class ExerciseChooser: ObservableObject {
         timerManager!.hasStartedExercise = false
         exerciseCount = 1
         setTimerManager(toSetNumber: currentExerciseSetPosition)
+    }
+    
+    func resetTemporaryCreatedExercises() {
+        exerciseSetBuilder = ExerciseSetBuilder()
     }
     
     ///This function is called by the View if the time of the last exercise ran out
@@ -96,6 +90,54 @@ class ExerciseChooser: ObservableObject {
         return "This is the last Exercise"
     }
     
+    func addInputToExerciseSet(name: String, duration: Double, pauseDuration: Double) {
+        
+        if name != "" && duration > 0 && pauseDuration > 0 {
+            let exercise = stringExerciseToExerciseStruct(name: name, duration: duration)
+            let pause = stringPauseToExerciseStruct(duration: pauseDuration)
+            
+            exerciseSetBuilder.temporaryCreatedExercises.append(exercise)
+            exerciseSetBuilder.temporaryCreatedExercises.append(pause)
+        }
+    }
+    
+    func createNewExercise(name: String, isPause: Bool, durationInSeconds: Double) -> Exercise {
+        let exercise = Exercise(existingIDs: exerciseIDs, name: name, isPause: isPause, durationInSeconds: durationInSeconds)
+        exerciseIDs.append(exercise.id)
+        return exercise
+    }
+    
+    func createExerciseSet(nameOfExerciseSet: String) {
+        if(nameOfExerciseSet == "") {
+            return
+        }
+        //1.) Create an Exercise Set with an unique id
+        exerciseSetBuilder.setNameOfExerciseSet(nameOfExerciseSetToBuild: nameOfExerciseSet)
+        if let exerciseSet = exerciseSetBuilder.createExerciseSetWithGivenInput(exerciseSets: exerciseSets) {
+            //2.) Add that ExerciseSet to the existing ExerciseSets if it can be created
+            exerciseSets.append(exerciseSet)
+        }
+    }
+    
+    func deleteExerciseSet(uniqueIdOfExerciseSet id: Int) {
+        exerciseSets.removeAll { $0.id == id}
+    }
+    
+    func getSelectedExerciseSet() -> ExerciseSet {
+        if currentExerciseSetPosition < exerciseSets.count {
+            return exerciseSets[currentExerciseSetPosition]
+        }
+        return exerciseSets[0]
+    }
+    
+    func chooseExerciseSet(exerciseSet: ExerciseSet) {
+        if let position = exerciseSets.firstIndex(of: exerciseSet) {
+            currentExerciseSetPosition = position
+        } else {
+            currentExerciseSetPosition = 0
+        }
+    }
+    
     
     ///This function plays a sound depending on the type of exercises that has ended
     private func playSound(wasPause: Bool) {
@@ -116,44 +158,6 @@ class ExerciseChooser: ObservableObject {
         }
     }
     
-
-    
-    func createNewExercise(name: String, isPause: Bool, durationInSeconds: Double) -> Exercise {
-        let exercise = Exercise(existingIDs: exerciseIDs, name: name, isPause: isPause, durationInSeconds: durationInSeconds)
-        exerciseIDs.append(exercise.id)
-        return exercise
-    }
-    
-    func createExerciseSet(nameOfExerciseSet: String) {
-        if(nameOfExerciseSet == "") {
-            return
-        }
-        //1.) Create an Exercise Set with an unique id
-        exerciseSetBuilder.setNameOfExerciseSet(nameOfExerciseSetToBuild: nameOfExerciseSet)
-        if let exerciseSet = exerciseSetBuilder.createExerciseSetWithGivenInput(exerciseSets: exerciseSets) {
-            //2.) Add that ExerciseSet to the existing ExerciseSets if it can be created
-            exerciseSets.append(exerciseSet)
-        }
-    }
-    
-    
-    
-    func getSelectedExerciseSet() -> ExerciseSet {
-        if currentExerciseSetPosition < exerciseSets.count {
-            return exerciseSets[currentExerciseSetPosition]
-        }
-        return exerciseSets[0]
-    }
-    
-    func chooseExerciseSet(exerciseSet: ExerciseSet) {
-        if let position = exerciseSets.firstIndex(of: exerciseSet) {
-            currentExerciseSetPosition = position
-        } else {
-            currentExerciseSetPosition = 0
-        }
-    }
-    
-    
     private func storeInUserDefaults() {
         UserDefaults.standard.set(try? JSONEncoder().encode(exerciseSets), forKey: userDefaultsKey)
     }
@@ -171,15 +175,6 @@ class ExerciseChooser: ObservableObject {
         }
     }
     
-    
-    func printAllAddedExercises() {
-        for exercise in exerciseSetBuilder.temporaryCreatedExercises {
-            print(exercise.name)
-            print(exercise.durationInSeconds)
-            print("---------")
-        }
-    }
-    
     private func stringExerciseToExerciseStruct(name: String, duration: Double) -> Exercise {
         if duration < 0.1 {
             return createNewExercise(name: name, isPause: false, durationInSeconds: 0.1)
@@ -194,25 +189,14 @@ class ExerciseChooser: ObservableObject {
         return createNewExercise(name: "Pause", isPause: true, durationInSeconds: duration)
     }
     
-    func addInputToExerciseSet(name: String, duration: Double, pauseDuration: Double) {
-        
-        if name != "" && duration > 0 && pauseDuration > 0 {
-            let exercise = stringExerciseToExerciseStruct(name: name, duration: duration)
-            let pause = stringPauseToExerciseStruct(duration: pauseDuration)
+    private func setTimerManager(toSetNumber num: Int) {
+        if num < exerciseSets.count && exerciseSets[num].exercises.count != 0 && exerciseSets[num].exercises.first != nil {
+            currentExerciseSetPosition = num
+            timerManager!.currentExercise = exerciseSets[num].exercises.first!
+            timerManager!.exerciseSet = exerciseSets[num]
+            timerManager!.hasStartedExercise = false
+            timerManager!.remainingTime = exerciseSets[num].exercises.first!.durationInSeconds
             
-            exerciseSetBuilder.temporaryCreatedExercises.append(exercise)
-            exerciseSetBuilder.temporaryCreatedExercises.append(pause)
-        }
-    }
-    
-    func printAllExerciseSets(existingExerciseSets: [ExerciseSet]) {
-        for existingExerciseSet in existingExerciseSets {
-            let exercises = existingExerciseSet.exercises
-            for exercise in exercises {
-                print(exercise.name)
-                print(exercise.id)
-                print(exercise.durationInSeconds)
-            }
         }
     }
     

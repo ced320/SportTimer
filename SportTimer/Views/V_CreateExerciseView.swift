@@ -14,23 +14,33 @@ struct V_CreateExerciseView2: View {
     //@FocusState var showKeyboard: Bool
     
     @State var nameOfExercise: String = ""
-    @State var durationOfExercise: Double = 30
-    @State var durationOfPause: Double = 10
+    @State var durationOfPause: String = ""
+    @State var durationOfExercise: String = ""
+    @State var warningForWrongInput = false
     
     var body: some View {
         VStack {
             List {
                 TextField("Name", text: $nameOfExercise)
-                TextField("durationOfExercise", value: $durationOfExercise, format: .number)
-                TextField("durationOfPause", value: $durationOfPause, format: .number)
+                TextField("durationOfExercise", text: $durationOfExercise)
+                TextField("durationOfPause", text: $durationOfPause)
             }
             Button("Add exercise to set") {
-                exerciseChooser.addInputToExerciseSet(name: nameOfExercise, duration: durationOfExercise, pauseDuration: durationOfPause)
-                exerciseChooser.printAllAddedExercises()
-                print("+++++++")
-                exerciseChooser.printAllExerciseSets(existingExerciseSets: exerciseChooser.exerciseSets)
+                let durationExercise = Double(durationOfExercise)
+                let durationPause = Double(durationOfPause)
+                
+                if durationExercise != nil && durationPause != nil && durationExercise! > 0 && durationPause! > 0 && nameOfExercise != "" {
+                    exerciseChooser.addInputToExerciseSet(name: nameOfExercise, duration: durationExercise!, pauseDuration: durationPause!)
+                    nameOfExercise = ""
+                    durationOfPause = ""
+                    durationOfExercise = ""
+                } else {
+                    warningForWrongInput = true
+                }
+            }.alert("Wrong input/s!", isPresented: $warningForWrongInput) {
                 
             }
+            
             V_addedExerciseView()
                 .environmentObject(exerciseChooser)
         }
