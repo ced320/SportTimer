@@ -120,7 +120,12 @@ class ExerciseChooser: ObservableObject {
     }
     
     func deleteExerciseSet(uniqueIdOfExerciseSet id: Int) {
-        exerciseSets.removeAll { $0.id == id}
+        if(id != 0 && id != 1) {
+            if(id == exerciseSets[currentExerciseSetPosition].id) {
+                currentExerciseSetPosition = 0
+            }
+            exerciseSets.removeAll { $0.id == id}
+        }
     }
     
     func getSelectedExerciseSet() -> ExerciseSet {
