@@ -45,6 +45,15 @@ struct M_Exercise: Codable, Identifiable {
             return candidate}()
     }
     
+    ///This function shows that the Exercise is correctly build and can be used for the Timer in a MVC
+    /// - Returns: true if correctly build else false
+    func correctlyBuild() -> Bool {
+        if durationInSeconds <= 0 {
+            return false
+        }
+        return true
+    }
+    
     
 
 

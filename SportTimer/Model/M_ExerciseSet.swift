@@ -54,4 +54,20 @@ struct M_ExerciseSet : Codable, Identifiable, Equatable {
             //4.) Give back that unique ID
             return candidate}()
     }
+    
+    ///This function shows that the ExerciseSet is correctly build and can be used for the Timer in a MVC
+    /// - Returns: true if correctly build else false
+    func correctlyBuild() -> Bool {
+        if exercises.count < 1 {
+            return false
+        }
+        for exercise in exercises {
+            if !exercise.correctlyBuild() {
+                return false
+            }
+        }
+        return true
+    }
+    
+    
 }

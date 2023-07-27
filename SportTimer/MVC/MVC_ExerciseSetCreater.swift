@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-struct MVC_ExerciseSetCreater: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+class MVC_ExerciseSetCreater: ObservableObject {
 
-struct MVC_ExerciseSetCreater_Previews: PreviewProvider {
-    static var previews: some View {
-        MVC_ExerciseSetCreater()
-    }
+    @Published private(set) var currentlyExistingExercises: M_ExerciseSet?
+    
+    
 }

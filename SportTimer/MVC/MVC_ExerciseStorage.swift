@@ -23,72 +23,26 @@ class MVC_ExerciseStorage: ObservableObject {
     let name: String
     //private var lastUsedExerciseSet = 0
     private var userDefaultsKey: String {"ExerciseSetStore"}
-    @Published  var timerManager : M_ExercisesForTimer?
-    private var player: AVAudioPlayer!
-    private var exerciseCount = 1
-    //
     
     init(named name: String) {
         self.name = name
         self.currentExerciseSetPosition = 0
-        //deleteUserDefaults()
-        restoreFromUserDefaults()
+        deleteUserDefaults()
+        //restoreFromUserDefaults()
         if exerciseSets.isEmpty {
             exerciseSets.append(createDefaultExerciseSet())
             exerciseSets.append(createDefaultExerciseSet2())
-            timerManager = M_ExercisesForTimer(exerciseSet: exerciseSets.first!, currentExercise: (exerciseSets.first?.exercises.first)!, remainingTime: (exerciseSets.first?.exercises.first!.durationInSeconds)!)
         } else {
             if exerciseSets.first != nil && exerciseSets.first!.exercises.first != nil {
-                timerManager = M_ExercisesForTimer(exerciseSet: exerciseSets.first!, currentExercise: (exerciseSets.first?.exercises.first)!, remainingTime: (exerciseSets.first?.exercises.first!.durationInSeconds)!)
             } else {
                 let defaultExerciseSet = createDefaultExerciseSet()
                 exerciseSets[0] = defaultExerciseSet
-                timerManager = M_ExercisesForTimer(exerciseSet: exerciseSets.first!, currentExercise: (exerciseSets.first?.exercises.first)!, remainingTime: (exerciseSets.first?.exercises.first!.durationInSeconds)!)
             }
         }
     }
     
-    func startExercise(withSetNumber setNum: Int) {
-        setTimerManager(toSetNumber: setNum)
-        timerManager!.hasStartedExercise = true
-    }
-    
-    func resetExerciseProgramToStart() {
-        timerManager!.hasStartedExercise = false
-        exerciseCount = 1
-        setTimerManager(toSetNumber: currentExerciseSetPosition)
-    }
-    
     func resetTemporaryCreatedExercises() {
         exerciseSetBuilder = M_ExerciseSetBuilder()
-    }
-    
-    ///This function is called by the View if the time of the last exercise ran out
-    ///or if needs to start the execution of exercises
-    ///The function sets the current exercise to the next exercise if there is one(end of array)
-    ///If the end of the array is reached
-    func setToNextExercise() {
-        playSound(wasPause: timerManager!.currentExercise.isPause)
-        if(exerciseCount < timerManager!.exerciseSet.exercises.count) {
-            timerManager!.currentExercise = timerManager!.exerciseSet.exercises[exerciseCount]
-        } else {
-            //Set back to default value that are the same as in the init()
-            resetExerciseProgramToStart()
-            return
-        }
-        timerManager!.remainingTime = timerManager!.currentExercise.durationInSeconds
-        exerciseCount += 1
-    }
-    
-    func printRemainingTime() -> String {
-        String(format: "%.0f", timerManager!.remainingTime)
-    }
-    
-    func showNextExerciseName() -> String {
-        if exerciseCount < timerManager!.exerciseSet.exercises.count {
-            return timerManager!.exerciseSet.exercises[exerciseCount].name
-        }
-        return "This is the last Exercise"
     }
     
     func addInputToExerciseSet(name: String, duration: Double, pauseDuration: Double) {
@@ -145,25 +99,6 @@ class MVC_ExerciseStorage: ObservableObject {
     }
     
     
-    ///This function plays a sound depending on the type of exercises that has ended
-    private func playSound(wasPause: Bool) {
-        var pathToSound = "singleBeep"
-        if(!wasPause) {
-            pathToSound = "doubleBeep"
-        }
-        let urlPossibleEmpty = Bundle.main.url(forResource: pathToSound, withExtension: "mp3")
-        //Check that url is not empty
-        guard let url = urlPossibleEmpty else {
-            return
-        }
-        do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
-        } catch {
-            print("Error with playing sound")
-        }
-    }
-    
     private func storeInUserDefaults() {
         UserDefaults.standard.set(try? JSONEncoder().encode(exerciseSets), forKey: userDefaultsKey)
     }
@@ -195,36 +130,33 @@ class MVC_ExerciseStorage: ObservableObject {
         return createNewExercise(name: "Pause", isPause: true, durationInSeconds: duration)
     }
     
+    /**
+     
+
+    ///TODO remove
+    ///
     private func setTimerManager(toSetNumber num: Int) {
         if num < exerciseSets.count && exerciseSets[num].exercises.count != 0 && exerciseSets[num].exercises.first != nil {
             currentExerciseSetPosition = num
             timerManager!.currentExercise = exerciseSets[num].exercises.first!
             timerManager!.exerciseSet = exerciseSets[num]
-            timerManager!.hasStartedExercise = false
+            timerManager!.setHasStartedExercise(to: false) 
             timerManager!.remainingTime = exerciseSets[num].exercises.first!.durationInSeconds
             
         }
     }
+    */
     
     private func createDefaultExerciseSet() -> M_ExerciseSet {
 
         var exercises = [M_Exercise]()
-        let p1 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 5)
-        let exc1 = createNewExercise(name: "1Squad", isPause: false, durationInSeconds: 30)
-        let p2 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 15)
-        let exc2 = createNewExercise(name: "1Hands to Ground", isPause: false, durationInSeconds: 30)
-        let p3 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 15)
-        let exc3 = createNewExercise(name: "Sitting", isPause: false, durationInSeconds: 35)
-        let p4 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 15)
-        let exc4 = createNewExercise(name: "Right Knee to wall", isPause: false, durationInSeconds: 30)
-        let p5 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 10)
-        let exc5 = createNewExercise(name: "Left Knee to wall", isPause: false, durationInSeconds: 30)
-        let p6 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 10)
-        let exc6 = createNewExercise(name: "Hands to table", isPause: false, durationInSeconds: 30)
-        let p7 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 10)
-        let exc7 = createNewExercise(name: "table", isPause: false, durationInSeconds: 45)
-        let p8 = createNewExercise(name: "1Pause", isPause: true, durationInSeconds: 10)
-        let exc8 = createNewExercise(name: "Squad", isPause: false, durationInSeconds: 30)
+        let p1 = createNewExercise(name: "1Pause1", isPause: true, durationInSeconds: 4)
+        let exc1 = createNewExercise(name: "1Squad", isPause: false, durationInSeconds: 3)
+        let p2 = createNewExercise(name: "1Pause2", isPause: true, durationInSeconds: 3)
+        let exc2 = createNewExercise(name: "1Hands to Ground", isPause: false, durationInSeconds: 3)
+        let p3 = createNewExercise(name: "1Pause3", isPause: true, durationInSeconds: 5)
+        let exc3 = createNewExercise(name: "Sitting", isPause: false, durationInSeconds: 3)
+
         
         exercises.append(p1)
         exercises.append(exc1)
@@ -232,16 +164,8 @@ class MVC_ExerciseStorage: ObservableObject {
         exercises.append(exc2)
         exercises.append(p3)
         exercises.append(exc3)
-        exercises.append(p4)
-        exercises.append(exc4)
-        exercises.append(p5)
-        exercises.append(exc5)
-        exercises.append(p6)
-        exercises.append(exc6)
-        exercises.append(p7)
-        exercises.append(exc7)
-        exercises.append(p8)
-        exercises.append(exc8)
+        exercises.append(p3)
+
         
         return M_ExerciseSet(exerciseSets: exerciseSets, name: "test1", exercises: exercises)
     }
