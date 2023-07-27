@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct V_CreateExerciseView2: View {
+struct V_CreateExerciseView: View {
     
-    @EnvironmentObject var exerciseChooser: ExerciseChooser
+    @EnvironmentObject var exerciseChooser: MVC_ExerciseStorage
     
     //@FocusState var showKeyboard: Bool
     
@@ -50,7 +50,7 @@ struct V_CreateExerciseView2: View {
 
 struct V_CreateExerciseView2_Previews: PreviewProvider {
     static var previews: some View {
-        V_CreateExerciseView2()
-            .environmentObject(ExerciseChooser(named: "exerciseChooser"))
+        V_CreateExerciseView()
+            .environmentObject(MVC_ExerciseStorage(named: "exerciseChooser"))
     }
 }

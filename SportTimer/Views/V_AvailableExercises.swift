@@ -9,7 +9,7 @@ import SwiftUI
 
 struct V_AvailableExercises: View {
     
-    @EnvironmentObject var exerciseChooser: ExerciseChooser
+    @EnvironmentObject var exerciseChooser: MVC_ExerciseStorage
     @State var deleteMode = false
     
     var body: some View {
@@ -66,6 +66,6 @@ struct V_AvailableExercises: View {
 struct V_AvaibleExercises_Previews: PreviewProvider {
     static var previews: some View {
         V_AvailableExercises()
-            .environmentObject(ExerciseChooser(named: "exerciseChooser"))
+            .environmentObject(MVC_ExerciseStorage(named: "exerciseStorage"))
     }
 }

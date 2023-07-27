@@ -9,7 +9,7 @@ import SwiftUI
 
 struct V_HomeView: View {
     
-    @EnvironmentObject var exerciseChooser: ExerciseChooser
+    @EnvironmentObject var exerciseChooser: MVC_ExerciseStorage
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -34,7 +34,7 @@ struct V_HomeView: View {
                                 .environmentObject(exerciseChooser)
                     }
                     NavigationLink("Create Exercise") {
-                        CreateExerciseSet()
+                        V_CreateExerciseSetView()
                             .environmentObject(exerciseChooser)
                     }
                 }
@@ -153,6 +153,6 @@ struct V_HomeView: View {
 struct V_HomeView_Previews: PreviewProvider {
     static var previews: some View {
         V_HomeView()
-            .environmentObject(ExerciseChooser(named: "exerciseChooser"))
+            .environmentObject(MVC_ExerciseStorage(named: "exerciseChooser"))
     }
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 import AVFAudio
 
-class ExerciseStorage: ObservableObject {
+class MVC_ExerciseStorage: ObservableObject {
     
     @Published private(set) var exerciseSets = [ExerciseSet]() {
         didSet {

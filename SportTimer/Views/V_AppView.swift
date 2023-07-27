@@ -11,17 +11,16 @@ import SwiftUI
 
 struct AppView: View {
    
-    @StateObject var exerciseChooser = ExerciseChooser(named: "exerciseChooser")
+    @StateObject var exerciseStorage = MVC_ExerciseStorage(named: "exerciseChooser")
 
     var body: some View {
         V_HomeView()
-            .environmentObject(exerciseChooser)
+            .environmentObject(exerciseStorage)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
    static var previews: some View {
        AppView()
-           .environmentObject(ExerciseChooser(named: "exerciseChooser"))
    }
 }
