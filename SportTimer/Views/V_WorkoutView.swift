@@ -10,7 +10,7 @@ import SwiftUI
 struct V_WorkoutView: View {
     
     @EnvironmentObject var exerciseSetStorage: MVC_ExerciseStorage
-    @EnvironmentObject var exerciseExecuter: MVC_ExerciseExecuter
+    @EnvironmentObject var exerciseExecuter: MVC_Workout
 
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()

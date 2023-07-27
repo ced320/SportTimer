@@ -11,7 +11,7 @@
 import SwiftUI
 import AVFAudio
 
-class MVC_ExerciseExecuter: ObservableObject {
+class MVC_Workout: ObservableObject {
     
     @Published private(set) var currentExerciseSetForWorkout: M_ExerciseSet?
     @Published private(set) var timerManager : M_ExercisesForTimer?

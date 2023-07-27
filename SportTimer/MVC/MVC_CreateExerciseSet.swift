@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class MVC_ExerciseSetCreater: ObservableObject {
+class MVC_CreateExerciseSet: ObservableObject {
 
     @Published private(set) var currentlyExistingExercises: M_ExerciseSet?
     
