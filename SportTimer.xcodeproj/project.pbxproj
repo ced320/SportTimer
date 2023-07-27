@@ -11,6 +11,8 @@
 		901B9F9829EAB4210081032F /* V_CreateExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */; };
 		901B9F9E29EBF8090081032F /* V_HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9D29EBF8090081032F /* V_HomeView.swift */; };
 		901B9FA029EBFD610081032F /* M_ExercisesForTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9F29EBFD610081032F /* M_ExercisesForTimer.swift */; };
+		902A3D682A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902A3D672A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift */; };
+		902A3D6A2A6FDD8300F5C78C /* MVC_ExerciseExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902A3D692A6FDD8300F5C78C /* MVC_ExerciseExecuter.swift */; };
 		90B2198029E8071E00E0DAD7 /* V_AvailableExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */; };
 		90C23D6029F122FC00767871 /* M_ExerciseSetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C23D5F29F122FC00767871 /* M_ExerciseSetBuilder.swift */; };
 		90C23D6229F13A4D00767871 /* V_addedExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C23D6129F13A4D00767871 /* V_addedExerciseView.swift */; };
@@ -50,6 +52,8 @@
 		901B9F9729EAB4210081032F /* V_CreateExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_CreateExerciseView.swift; sourceTree = "<group>"; };
 		901B9F9D29EBF8090081032F /* V_HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_HomeView.swift; sourceTree = "<group>"; };
 		901B9F9F29EBFD610081032F /* M_ExercisesForTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ExercisesForTimer.swift; sourceTree = "<group>"; };
+		902A3D672A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseStorage.swift; sourceTree = "<group>"; };
+		902A3D692A6FDD8300F5C78C /* MVC_ExerciseExecuter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseExecuter.swift; sourceTree = "<group>"; };
 		90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_AvailableExercises.swift; sourceTree = "<group>"; };
 		90C23D5F29F122FC00767871 /* M_ExerciseSetBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ExerciseSetBuilder.swift; sourceTree = "<group>"; };
 		90C23D6129F13A4D00767871 /* V_addedExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_addedExerciseView.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				90E6745D29E431220060C2F6 /* MVC_ExerciseChooser.swift */,
+				902A3D672A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift */,
+				902A3D692A6FDD8300F5C78C /* MVC_ExerciseExecuter.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -338,6 +344,7 @@
 				901B9F9829EAB4210081032F /* V_CreateExerciseView.swift in Sources */,
 				90C23D6029F122FC00767871 /* M_ExerciseSetBuilder.swift in Sources */,
 				901B9F9629EAABB70081032F /* V_CreateExerciseSetView.swift in Sources */,
+				902A3D6A2A6FDD8300F5C78C /* MVC_ExerciseExecuter.swift in Sources */,
 				901B9FA029EBFD610081032F /* M_ExercisesForTimer.swift in Sources */,
 				90F0CFEE28A6A34000864973 /* M_Exercise.swift in Sources */,
 				901B9F9E29EBF8090081032F /* V_HomeView.swift in Sources */,
@@ -347,6 +354,7 @@
 				90E6746029E433DC0060C2F6 /* M_ExerciseSet.swift in Sources */,
 				90F0CFBC28A6A0C900864973 /* SportTimerApp.swift in Sources */,
 				90B2198029E8071E00E0DAD7 /* V_AvailableExercises.swift in Sources */,
+				902A3D682A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +423,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -475,6 +484,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

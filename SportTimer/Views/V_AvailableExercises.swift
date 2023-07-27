@@ -13,19 +13,27 @@ struct V_AvailableExercises: View {
     @State var deleteMode = false
     
     var body: some View {
-        ScrollView {
-            deleteOption
-            Spacer()
+        List {
+            Text("Currently selected: \(exerciseChooser.getSelectedExerciseSet().name)")
             ForEach(exerciseChooser.exerciseSets) { exerciseSet in
                 Button(exerciseSet.name) {
                     if !deleteMode {
-                        exerciseChooser.chooseExerciseSet(exerciseSet: exerciseSet)
+                        withAnimation {
+                            exerciseChooser.chooseExerciseSet(exerciseSet: exerciseSet)
+                        }
                     } else {
-                        exerciseChooser.deleteExerciseSet(uniqueIdOfExerciseSet: exerciseSet.id)
+                        withAnimation {
+                            exerciseChooser.deleteExerciseSet(uniqueIdOfExerciseSet: exerciseSet.id)
+                        }
                     }
-
-                }
+                }.foregroundColor(deleteMode ? .red : .blue)
             }
+        }.toolbar {
+            deleteOption
+        }
+        if !deleteMode {
+            Text("Select an exercise-set")
+                .padding()
         }
     }
     
@@ -33,7 +41,7 @@ struct V_AvailableExercises: View {
     var deleteOption: some View {
         if deleteMode {
             HStack {
-                Text("DeletionMode activated!")
+                Text("Tap to delete!")
                 Image(systemName: "trash")
                     .onTapGesture {
                         withAnimation {
@@ -44,7 +52,6 @@ struct V_AvailableExercises: View {
 
         } else {
             HStack {
-                Text("Select an exercise-set")
                 Image(systemName: "trash")
                     .onTapGesture {
                         withAnimation {
@@ -59,5 +66,6 @@ struct V_AvailableExercises: View {
 struct V_AvaibleExercises_Previews: PreviewProvider {
     static var previews: some View {
         V_AvailableExercises()
+            .environmentObject(ExerciseChooser(named: "exerciseChooser"))
     }
 }

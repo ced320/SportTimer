@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AVFoundation
+//import AVFoundation
 
 
 struct AppView: View {
@@ -22,5 +22,6 @@ struct AppView: View {
 struct ContentView_Previews: PreviewProvider {
    static var previews: some View {
        AppView()
+           .environmentObject(ExerciseChooser(named: "exerciseChooser"))
    }
 }

@@ -14,34 +14,32 @@ struct V_HomeView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                Spacer()
-                NavigationLink("Start Exercise") {
-                    if(!exerciseChooser.timerManager!.hasStartedExercise) {
-                        beforeStartView
-                    } else {
-                        exerciseView
-                           .onDisappear{
-                               withAnimation {
-                                   exerciseChooser.resetExerciseProgramToStart()
+        VStack {
+            NavigationStack {
+                List {
+                    NavigationLink("Start Exercise") {
+                        if(!exerciseChooser.timerManager!.hasStartedExercise) {
+                            beforeStartView
+                        } else {
+                            exerciseView
+                                .onDisappear{
+                                    withAnimation {
+                                        exerciseChooser.resetExerciseProgramToStart()
+                                    }
                                 }
-                            }
+                        }
+                    }
+                    NavigationLink("Select Exercise") {
+                            V_AvailableExercises()
+                                .environmentObject(exerciseChooser)
+                    }
+                    NavigationLink("Create Exercise") {
+                        CreateExerciseSet()
+                            .environmentObject(exerciseChooser)
                     }
                 }
-                Spacer()
-                NavigationLink("Select Exercise") {
-                    V_AvailableExercises()
-                        .environmentObject(exerciseChooser)
-                }
-                Spacer()
-                NavigationLink("Create Exercise") {
-                   CreateExerciseSet()
-                        .environmentObject(exerciseChooser)
-                }
-                Spacer()
+                .navigationTitle("Sportstimer")
             }
-            .navigationTitle("Sportstimer")
         }
    }
     
@@ -155,5 +153,6 @@ struct V_HomeView: View {
 struct V_HomeView_Previews: PreviewProvider {
     static var previews: some View {
         V_HomeView()
+            .environmentObject(ExerciseChooser(named: "exerciseChooser"))
     }
 }

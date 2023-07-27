@@ -83,5 +83,6 @@ struct CreateExerciseSet: View {
 struct CreateExerciseView_Previews: PreviewProvider {
     static var previews: some View {
         CreateExerciseSet()
+            .environmentObject(ExerciseChooser(named: "exerciseChooser"))
     }
 }
