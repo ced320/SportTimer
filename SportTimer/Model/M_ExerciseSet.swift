@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ExerciseSet : Codable, Identifiable, Equatable {
-    static func == (lhs: ExerciseSet, rhs: ExerciseSet) -> Bool {
+struct M_ExerciseSet : Codable, Identifiable, Equatable {
+    static func == (lhs: M_ExerciseSet, rhs: M_ExerciseSet) -> Bool {
         if lhs.id == rhs.id {
             return true
         }
@@ -17,15 +17,15 @@ struct ExerciseSet : Codable, Identifiable, Equatable {
     
     var id: Int
     var name: String
-    var exercises: [Exercise]
+    var exercises: [M_Exercise]
     
-    init(id: Int, name: String, exercises: [Exercise]) {
+    init(id: Int, name: String, exercises: [M_Exercise]) {
         self.id = id
         self.name = name
         self.exercises = exercises
     }
     
-    init(exerciseSets: [ExerciseSet], name: String, exercises: [Exercise]) {
+    init(exerciseSets: [M_ExerciseSet], name: String, exercises: [M_Exercise]) {
         
         self.name = name
         self.exercises = exercises

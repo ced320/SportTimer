@@ -8,7 +8,7 @@
 import Foundation
 
 ///This struct represents an Exercise
-struct Exercise: Codable, Identifiable {
+struct M_Exercise: Codable, Identifiable {
     let id: Int
     let name: String
     let isPause: Bool

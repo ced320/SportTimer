@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct ExercisesForTimer {
+struct M_ExercisesForTimer {
     
-    var exerciseSet: ExerciseSet
-    var currentExercise : Exercise
+    var exerciseSet: M_ExerciseSet
+    var currentExercise : M_Exercise
     var hasStartedExercise = false
     var remainingTime: Double
     var lastUsedExerciseSet = 0

@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ExerciseSetBuilder {
-    var temporaryCreatedExercises: [Exercise] = [Exercise]()
+struct M_ExerciseSetBuilder {
+    var temporaryCreatedExercises: [M_Exercise] = [M_Exercise]()
     var nameOfExerciseSetToBuild: String?
     
-    mutating func createExerciseSetWithGivenInput(exerciseSets: [ExerciseSet]) -> ExerciseSet? {
+    mutating func createExerciseSetWithGivenInput(exerciseSets: [M_ExerciseSet]) -> M_ExerciseSet? {
         if temporaryCreatedExercises.count > 0 && nameOfExerciseSetToBuild != nil {
-            let exerciseSet = ExerciseSet(exerciseSets: exerciseSets, name: nameOfExerciseSetToBuild!, exercises: temporaryCreatedExercises)
+            let exerciseSet = M_ExerciseSet(exerciseSets: exerciseSets, name: nameOfExerciseSetToBuild!, exercises: temporaryCreatedExercises)
             resetExerciseBuilder()
             return exerciseSet
         }
@@ -26,6 +26,6 @@ struct ExerciseSetBuilder {
     
     private mutating func resetExerciseBuilder() {
         nameOfExerciseSetToBuild = nil
-        temporaryCreatedExercises = [Exercise]()
+        temporaryCreatedExercises = [M_Exercise]()
     }
 }
