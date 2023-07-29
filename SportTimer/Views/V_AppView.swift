@@ -10,8 +10,7 @@ import SwiftUI
 
 struct AppView: View {
    
-    @StateObject var exerciseStorage = MVC_ExerciseStorage(named: "exerciseChooser")
-    //@StateObject var exerciseExecuter = MVC_Workout()
+    @StateObject var exerciseStorage = MVC_ExerciseStorage()
     @StateObject var createExercise = MVC_CreateExerciseSet()
 
     var body: some View {

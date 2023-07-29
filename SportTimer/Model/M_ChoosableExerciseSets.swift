@@ -13,6 +13,9 @@ struct M_ChoosableExerciseSets: Codable {
     private(set) var lastKnownExerciseId = 0
     private(set) var pointerWorkoutSet = 0
     
+    
+    /// This initater is needed to ensure there is never an empty exerciseSetsArray because that would lead to fatal failure of the app
+    /// - Parameter basicInit: true and false has no impact till more is implemented
     init(basicInit: Bool) {
         var exercises = [M_Exercise]()
         let p1 = M_Exercise(uniqueId: 0, name: "1Pause1", isPause: true, durationInSeconds: 4)
@@ -29,7 +32,7 @@ struct M_ChoosableExerciseSets: Codable {
         exercises.append(p3)
         exercises.append(exercise3)
         exercises.append(p4)
-        let exerciseSet = M_ExerciseSet(name: "Test1", exercises: exercises)
+        let exerciseSet = M_ExerciseSet(uniqueName: "Test1", exercises: exercises)
         exerciseSets.append(exerciseSet)
         exerciseIDs = [0,1,2,3,4,5,6]
         lastKnownExerciseId = 6
@@ -50,7 +53,7 @@ struct M_ChoosableExerciseSets: Codable {
         exercises2.append(p32)
         exercises2.append(exercise32)
         exercises2.append(p42)
-        let exerciseSet2 = M_ExerciseSet(name: "Test2", exercises: exercises2)
+        let exerciseSet2 = M_ExerciseSet(uniqueName: "Test2", exercises: exercises2)
         exerciseSets.append(exerciseSet2)
         exerciseIDs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
         lastKnownExerciseId = 13
@@ -67,7 +70,7 @@ struct M_ChoosableExerciseSets: Codable {
     mutating func createNewExerciseSet(name possibleNotUniqueName: String, exercises exercisesWithPossibleNoUniqueIds: [M_Exercise]) {
         let name = transformToUniqueName(name: possibleNotUniqueName)
         let exercises = transformToUniqueExerciseList(exercises: exercisesWithPossibleNoUniqueIds)
-        let exerciseSet = M_ExerciseSet(name: name, exercises: exercises)
+        let exerciseSet = M_ExerciseSet(uniqueName: name, exercises: exercises)
         exerciseSets.append(exerciseSet)
     }
     

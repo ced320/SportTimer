@@ -43,6 +43,6 @@ struct V_HomeView: View {
 struct V_HomeView_Previews: PreviewProvider {
     static var previews: some View {
         V_HomeView()
-            .environmentObject(MVC_ExerciseStorage(named: "exerciseChooser"))
+            .environmentObject(MVC_ExerciseStorage())
     }
 }

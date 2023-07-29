@@ -66,6 +66,6 @@ struct V_AvailableExercises: View {
 struct V_AvaibleExercises_Previews: PreviewProvider {
     static var previews: some View {
         V_AvailableExercises()
-            .environmentObject(MVC_ExerciseStorage(named: "exerciseStorage"))
+            .environmentObject(MVC_ExerciseStorage())
     }
 }

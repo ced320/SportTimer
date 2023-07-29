@@ -33,7 +33,7 @@ struct M_ExerciseSetBuilder {
     /// - Returns: the M_ExerciseSet that shall be added or nil if the currently build set is bad structured
     mutating func giveBackExerciseSetAndEmptyIt(nameOfSet:String) -> M_ExerciseSet? {
         if wellBuildTemporarySet() {
-            let result = M_ExerciseSet(name: nameOfSet, exercises: exerciseSetThatShallBeAdded)
+            let result = M_ExerciseSet(uniqueName: nameOfSet, exercises: exerciseSetThatShallBeAdded)
             exerciseSetThatShallBeAdded = [M_Exercise]()
             tempIDsExercises = Set<Int>()
             return result

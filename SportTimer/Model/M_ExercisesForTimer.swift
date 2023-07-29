@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// This struct is used to model the exercises that are used during the workout
 struct M_ExercisesForTimer {
     
     private(set) var exerciseSet: M_ExerciseSet
@@ -15,6 +17,10 @@ struct M_ExercisesForTimer {
     private(set) var remainingTime: Double
     private(set) var currentExercisePositionInArray: Int
     
+    
+    /// reduce the internal remaining time
+    /// - Parameter sec: in seconds
+    /// - Returns: true if time has been reduced false else
     mutating func reduceRemainingTime(bySeconds sec: Double) -> Bool {
         remainingTime -= sec
         if remainingTime <= 0 {
@@ -24,6 +30,8 @@ struct M_ExercisesForTimer {
         return false
     }
     
+    /// sets the internal parameter has started to the given bool parameter
+    /// - Parameter newValueForHasStarted: newValueForHasStarted
     mutating func setHasStartedExercise(to newValueForHasStarted:Bool) {
         hasStartedExercise = newValueForHasStarted
     }
@@ -44,6 +52,8 @@ struct M_ExercisesForTimer {
         remainingTime = currentExercise.durationInSeconds
     }
     
+    
+    /// resets the internal values to a state right before the workout starts
     mutating func resetToStartValues() {
         currentExercise = exerciseSet.exercises.first!
         remainingTime = currentExercise.durationInSeconds
@@ -51,6 +61,11 @@ struct M_ExercisesForTimer {
         currentExercisePositionInArray = 0
     }
     
+    
+    /// returns string that contains the next exercise name if there is no next exercise
+    /// the string "There are no more exercises" will be returned
+    /// - Returns: returns string that contains the next exercise name if there is no next exercise
+    /// the string "There are no more exercises" will be returned
     func showNextExerciseName() -> String {
         if currentExercisePositionInArray+1 < exerciseSet.exercises.count {
             return exerciseSet.exercises[currentExercisePositionInArray+1].name
@@ -58,6 +73,9 @@ struct M_ExercisesForTimer {
         return "There are no more exercises"
     }
     
+    
+    /// returns string that displays the current exercise name
+    /// - Returns: string that displays the current exercise name
     func showCurrentExerciseName() -> String {
         if currentExercisePositionInArray < exerciseSet.exercises.count {
             return exerciseSet.exercises[currentExercisePositionInArray].name

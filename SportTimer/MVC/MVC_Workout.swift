@@ -11,40 +11,48 @@
 import SwiftUI
 import AVFAudio
 
+/// used to model workout process 
 class MVC_Workout: ObservableObject {
     
     @Published private(set) var currentExerciseSetForWorkout: M_ExerciseSet?
     @Published private(set) var timerManager : M_ExercisesForTimer?
     private var player: AVAudioPlayer!
-    //private var exerciseCount = 1
-    //private var currentExercise: M_Exercise?
-    //private var remainingTime: Double?
     
     
+    /// Used to model the workout process
     init() {
         self.currentExerciseSetForWorkout = nil
     }
     
+    
+    /// sets workout to has started
+    /// - Parameter withThisExerciseSet: the exerciseSet that is used for the current workout
+    /// - Returns: Void
     func startWorkout(withThisExerciseSet: M_ExerciseSet) -> Void {
         if setupWorkoutWithGivenSet(setForWorkout: withThisExerciseSet) {
             timerManager!.setHasStartedExercise(to: true)
         }
     }
     
+    /// updated the time in the workout. So that internal parameters are updated
+    /// - Parameter timeSinceLastUpdate: in seconds
     func updateWorkoutTimer(timeSinceLastUpdate: Double) {
         if timerManager != nil && timerManager!.hasStartedExercise {
             if timerManager!.reduceRemainingTime(bySeconds: timeSinceLastUpdate) {
-                playSound(wasPause: timerManager!.currentExercise.isPause)
+                playSound(nextIsPause: timerManager!.currentExercise.isPause)
             }
         }
     }
     
+    /// Resets workout to start
     func resetWorkoutToStart() {
         if timerManager != nil {
             timerManager!.resetToStartValues()
         }
     }
     
+    /// as function names implies
+    /// - Returns: the current exercise name
     func showCurrentExerciseName() -> String {
         if timerManager != nil {
             return timerManager!.showCurrentExerciseName()
@@ -52,6 +60,8 @@ class MVC_Workout: ObservableObject {
         return "Error in showCurrentExerciseName() timerManager was nil"
     }
     
+    /// as function name implies
+    /// - Returns: name of next exercise
     func showNextExerciseName() -> String {
         if timerManager != nil {
             return timerManager!.showNextExerciseName()
@@ -60,6 +70,8 @@ class MVC_Workout: ObservableObject {
     }
     
     
+    /// prints remaining seconds
+    /// - Returns: remaining seconds as string
     func printRemainingTime() -> String {
         if timerManager != nil {
             return String(format: "%.0f", timerManager!.remainingTime)
@@ -67,8 +79,9 @@ class MVC_Workout: ObservableObject {
         return "Error in printRemainingTime() timerManager was nil"
     }
     
-    
-    ///This function
+    /// Setups the workout for the next workout
+    /// - Parameter setForWorkout: set for next workout
+    /// - Returns: true if it could be set false else
     private func setupWorkoutWithGivenSet(setForWorkout: M_ExerciseSet) -> Bool{
         if setForWorkout.correctlyBuild() {
             currentExerciseSetForWorkout = setForWorkout
@@ -82,9 +95,9 @@ class MVC_Workout: ObservableObject {
     }
     
     ///This function plays a sound depending on the type of exercises that has ended
-    private func playSound(wasPause: Bool) {
+    private func playSound(nextIsPause: Bool) {
         var pathToSound = "singleBeep"
-        if(!wasPause) {
+        if(nextIsPause) {
             pathToSound = "doubleBeep"
         }
         let urlPossibleEmpty = Bundle.main.url(forResource: pathToSound, withExtension: "mp3")
