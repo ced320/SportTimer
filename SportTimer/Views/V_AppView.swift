@@ -6,19 +6,18 @@
 //
 
 import SwiftUI
-//import AVFoundation
 
 
 struct AppView: View {
    
     @StateObject var exerciseStorage = MVC_ExerciseStorage(named: "exerciseChooser")
     //@StateObject var exerciseExecuter = MVC_Workout()
-    //@StateObject var exerciseSetCreater = MVC_ExerciseSetCreater()
+    @StateObject var createExercise = MVC_CreateExerciseSet()
 
     var body: some View {
         V_HomeView()
             .environmentObject(exerciseStorage)
-            //.environmentObject(exerciseExecuter)
+            .environmentObject(createExercise)
     }
 }
 

@@ -10,8 +10,7 @@ import SwiftUI
 struct V_CreateExerciseView: View {
     
     @EnvironmentObject var exerciseChooser: MVC_ExerciseStorage
-    
-    //@FocusState var showKeyboard: Bool
+    @EnvironmentObject var createExercise: MVC_CreateExerciseSet
     
     @State var nameOfExercise: String = ""
     @State var durationOfPause: String = ""
@@ -30,7 +29,8 @@ struct V_CreateExerciseView: View {
                 let durationPause = Double(durationOfPause)
                 
                 if durationExercise != nil && durationPause != nil && durationExercise! > 0 && durationPause! > 0 && nameOfExercise != "" {
-                    exerciseChooser.addInputToExerciseSet(name: nameOfExercise, duration: durationExercise!, pauseDuration: durationPause!)
+                    createExercise.addExerciseToExerciseSet(name: nameOfExercise, isPause: false, durationInSeconds: durationExercise!)
+                    createExercise.addExerciseToExerciseSet(name: "Break", isPause: true, durationInSeconds: durationPause!)
                     nameOfExercise = ""
                     durationOfPause = ""
                     durationOfExercise = ""

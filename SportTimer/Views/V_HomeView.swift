@@ -10,7 +10,7 @@ import SwiftUI
 struct V_HomeView: View {
     
     @EnvironmentObject var exerciseSetStorage: MVC_ExerciseStorage
-    //@EnvironmentObject var exerciseExecuter: MVC_Workout
+    @EnvironmentObject var createExercise: MVC_CreateExerciseSet
     
     var body: some View {
         VStack {

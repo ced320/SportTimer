@@ -14,13 +14,16 @@ struct M_Exercise: Codable, Identifiable {
     let isPause: Bool
     private(set) var durationInSeconds: Double
 
-    init(id: Int, name: String, isPause: Bool, durationInSeconds: Double) {
-        self.id = id
+    init(uniqueId: Int, name: String, isPause: Bool, durationInSeconds: Double) {
+        self.id = uniqueId
         self.name = name
         self.isPause = isPause
         self.durationInSeconds = durationInSeconds
     }
     
+    /**
+     
+
     init(existingIDs: [Int], name: String, isPause: Bool, durationInSeconds: Double) {
         self.name = name
         self.isPause = isPause
@@ -44,6 +47,7 @@ struct M_Exercise: Codable, Identifiable {
             //4.) Give back that unique ID
             return candidate}()
     }
+     */
     
     ///This function shows that the Exercise is correctly build and can be used for the Timer in a MVC
     /// - Returns: true if correctly build else false

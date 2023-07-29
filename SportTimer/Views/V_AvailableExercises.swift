@@ -15,7 +15,7 @@ struct V_AvailableExercises: View {
     var body: some View {
         List {
             Text("Currently selected: \(exerciseChooser.getSelectedExerciseSet().name)")
-            ForEach(exerciseChooser.exerciseSets) { exerciseSet in
+            ForEach(exerciseChooser.choosableWorkouts.exerciseSets) { exerciseSet in
                 Button(exerciseSet.name) {
                     if !deleteMode {
                         withAnimation {

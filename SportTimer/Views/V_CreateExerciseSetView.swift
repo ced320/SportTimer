@@ -10,6 +10,7 @@ import SwiftUI
 struct V_CreateExerciseSetView: View {
     
     @EnvironmentObject var exerciseChooser: MVC_ExerciseStorage
+    @EnvironmentObject var createExerciseSet: MVC_CreateExerciseSet
     
     @State var testSaver1: String = ""
     @State var showWarning = false
@@ -38,7 +39,7 @@ struct V_CreateExerciseSetView: View {
     var resetExercisesCreated: some View {
         Button("Reset created Exercises") {
             withAnimation {
-                exerciseChooser.resetTemporaryCreatedExercises()
+                createExerciseSet.resetTemporaryAddedExercises()
             }
         }.foregroundColor(.red)
     }
@@ -57,10 +58,11 @@ struct V_CreateExerciseSetView: View {
     
     @ViewBuilder
     var createExerciseSection: some View {
-        if testSaver1 != "" && exerciseChooser.exerciseSetBuilder.temporaryCreatedExercises.count != 0 {
+        if testSaver1 != "" && createExerciseSet.wellBuild() {
             Button("Create exercise-set") {
                 withAnimation {
-                    exerciseChooser.createExerciseSet(nameOfExerciseSet: testSaver1)
+                    let temporarySet = createExerciseSet.addExerciseSet(nameOfSet: testSaver1)!
+                    exerciseChooser.createExerciseSet(nameOfExerciseSet: temporarySet.name, exercisesOfSet: temporarySet.exercises)
                 }
             }
         }

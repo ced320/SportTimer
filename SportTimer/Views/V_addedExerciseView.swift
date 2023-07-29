@@ -10,11 +10,11 @@ import SwiftUI
 struct V_addedExerciseView: View {
     
     @EnvironmentObject var exerciseChooser: MVC_ExerciseStorage
-    
+    @EnvironmentObject var builder: MVC_CreateExerciseSet
     
     var body: some View {
         ScrollView {
-            ForEach(exerciseChooser.exerciseSetBuilder.temporaryCreatedExercises) { exercise in
+            ForEach(builder.exerciseSetBuilder.exerciseSetThatShallBeAdded) { exercise in
                 VStack {
                     Text(exercise.name)
                 }
