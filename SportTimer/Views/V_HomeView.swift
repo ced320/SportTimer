@@ -10,7 +10,7 @@ import SwiftUI
 struct V_HomeView: View {
     
     @EnvironmentObject var exerciseSetStorage: MVC_ExerciseStorage
-    @EnvironmentObject var exerciseExecuter: MVC_Workout
+    //@EnvironmentObject var exerciseExecuter: MVC_Workout
     
     var body: some View {
         VStack {
@@ -18,15 +18,12 @@ struct V_HomeView: View {
                 List {
                     NavigationLink("Start Exercise") {
                         V_WorkoutView()
-                            .environmentObject(exerciseSetStorage)
                     }
                     NavigationLink("Select Exercise") {
-                            V_AvailableExercises()
-                                .environmentObject(exerciseSetStorage)
+                        V_AvailableExercises()
                     }
                     NavigationLink("Create Exercise") {
                         V_CreateExerciseSetView()
-                            .environmentObject(exerciseSetStorage)
                     }
                 }
                 .navigationTitle("Sportstimer")

@@ -30,7 +30,6 @@ struct V_CreateExerciseSetView: View {
                 createExerciseSection
                 Section("Exercise added") {
                     V_addedExerciseView()
-                        .environmentObject(exerciseChooser)
                 }
             }
         }

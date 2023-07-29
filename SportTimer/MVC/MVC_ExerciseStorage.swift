@@ -21,7 +21,6 @@ class MVC_ExerciseStorage: ObservableObject {
     @Published private(set) var exerciseSetIDs = [Int]()
     @Published private(set) var currentExerciseSetPosition = 0
     let name: String
-    //private var lastUsedExerciseSet = 0
     private var userDefaultsKey: String {"ExerciseSetStore"}
     
     init(named name: String) {

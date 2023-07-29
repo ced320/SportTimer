@@ -10,7 +10,8 @@ import SwiftUI
 struct V_WorkoutView: View {
     
     @EnvironmentObject var exerciseSetStorage: MVC_ExerciseStorage
-    @EnvironmentObject var exerciseExecuter: MVC_Workout
+    @StateObject var exerciseExecuter = MVC_Workout()
+    //@EnvironmentObject var exerciseExecuter: MVC_Workout
 
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -45,7 +46,6 @@ struct V_WorkoutView: View {
                 .onTapGesture {
                     withAnimation {
                         exerciseExecuter.startWorkout(withThisExerciseSet: exerciseSetStorage.getSelectedExerciseSet())
-                        //exerciseSetStorage.startExercise(withSetNumber: exerciseSetStorage.currentExerciseSetPosition)
                     }
                 }
             Spacer()
