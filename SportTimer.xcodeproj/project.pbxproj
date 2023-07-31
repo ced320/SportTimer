@@ -13,7 +13,6 @@
 		901B9FA029EBFD610081032F /* M_ExercisesForTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901B9F9F29EBFD610081032F /* M_ExercisesForTimer.swift */; };
 		901E26312A72B0D30002D834 /* MVC_CreateExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901E26302A72B0D30002D834 /* MVC_CreateExerciseSet.swift */; };
 		901E26332A72D5480002D834 /* V_WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901E26322A72D5480002D834 /* V_WorkoutView.swift */; };
-		902762E92A77A57400DAEB30 /* V_tempHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902762E82A77A57400DAEB30 /* V_tempHomeView.swift */; };
 		902762EB2A77A89400DAEB30 /* E_Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902762EA2A77A89400DAEB30 /* E_Color.swift */; };
 		902762EE2A77AAD100DAEB30 /* M_ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902762ED2A77AAD100DAEB30 /* M_ColorScheme.swift */; };
 		902A3D682A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902A3D672A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift */; };
@@ -59,7 +58,6 @@
 		901B9F9F29EBFD610081032F /* M_ExercisesForTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ExercisesForTimer.swift; sourceTree = "<group>"; };
 		901E26302A72B0D30002D834 /* MVC_CreateExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_CreateExerciseSet.swift; sourceTree = "<group>"; };
 		901E26322A72D5480002D834 /* V_WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_WorkoutView.swift; sourceTree = "<group>"; };
-		902762E82A77A57400DAEB30 /* V_tempHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_tempHomeView.swift; sourceTree = "<group>"; };
 		902762EA2A77A89400DAEB30 /* E_Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = E_Color.swift; sourceTree = "<group>"; };
 		902762ED2A77AAD100DAEB30 /* M_ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ColorScheme.swift; sourceTree = "<group>"; };
 		902A3D672A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseStorage.swift; sourceTree = "<group>"; };
@@ -142,6 +140,7 @@
 			children = (
 				90F0CFBF28A6A0CB00864973 /* Assets.xcassets */,
 				90F0CFEC28A6A2BC00864973 /* App */,
+				902762EC2A77A89F00DAEB30 /* Extensions */,
 				90F0CFEA28A6A29600864973 /* Model */,
 				90F0CFE928A6A28B00864973 /* MVC */,
 				90F0CFEB28A6A29D00864973 /* Views */,
@@ -209,8 +208,6 @@
 				901B9F9D29EBF8090081032F /* V_HomeView.swift */,
 				90C23D6129F13A4D00767871 /* V_addedExerciseView.swift */,
 				901E26322A72D5480002D834 /* V_WorkoutView.swift */,
-				902762E82A77A57400DAEB30 /* V_tempHomeView.swift */,
-				902762EC2A77A89F00DAEB30 /* Extensions */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -374,7 +371,6 @@
 				901E26312A72B0D30002D834 /* MVC_CreateExerciseSet.swift in Sources */,
 				901B9FA029EBFD610081032F /* M_ExercisesForTimer.swift in Sources */,
 				90F0CFEE28A6A34000864973 /* M_Exercise.swift in Sources */,
-				902762E92A77A57400DAEB30 /* V_tempHomeView.swift in Sources */,
 				901B9F9E29EBF8090081032F /* V_HomeView.swift in Sources */,
 				90C23D6229F13A4D00767871 /* V_addedExerciseView.swift in Sources */,
 				90F0CFBE28A6A0C900864973 /* V_AppView.swift in Sources */,
