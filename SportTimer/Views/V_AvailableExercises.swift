@@ -13,52 +13,21 @@ struct V_AvailableExercises: View {
     @State var deleteMode = false
     
     var body: some View {
-        List {
-            Text("Currently selected: \(exerciseChooser.getSelectedExerciseSet().name)")
-            ForEach(exerciseChooser.choosableWorkouts.exerciseSets) { exerciseSet in
-                Button(exerciseSet.name) {
-                    if !deleteMode {
-                        withAnimation {
-                            exerciseChooser.chooseExerciseSet(exerciseSet: exerciseSet)
-                        }
-                    } else {
-                        withAnimation {
-                            exerciseChooser.deleteExerciseSet(uniqueIdOfExerciseSet: exerciseSet.id)
-                        }
+        VStack {
+        Text("Currently selected: \(exerciseChooser.getSelectedExerciseSet().name)")
+        List (exerciseChooser.choosableWorkouts.exerciseSets){ exerciseSet in
+                Text(exerciseSet.name)
+                    .swipeActions {
+                        Button {
+                            exerciseChooser.deleteExerciseSet(uniqueIdOfExerciseSet: exerciseSet.name)
+                        } label: {
+                            Text("Delete")
+                        }.tint(.red)
                     }
-                }.foregroundColor(deleteMode ? .red : .blue)
-            }
-        }.toolbar {
-            deleteOption
-        }
-        if !deleteMode {
-            Text("Select an exercise-set")
-                .padding()
-        }
-    }
-    
-    @ViewBuilder
-    var deleteOption: some View {
-        if deleteMode {
-            HStack {
-                Text("Tap to delete!")
-                Image(systemName: "trash")
                     .onTapGesture {
-                        withAnimation {
-                            deleteMode.toggle()
-                        }
+                        exerciseChooser.chooseExerciseSet(exerciseSet: exerciseSet)
                     }
-            }.foregroundColor(.red)
-
-        } else {
-            HStack {
-                Image(systemName: "trash")
-                    .onTapGesture {
-                        withAnimation {
-                            deleteMode.toggle()
-                        }
-                    }
-            }.foregroundColor(.black)
+            }.listStyle(PlainListStyle())
         }
     }
 }

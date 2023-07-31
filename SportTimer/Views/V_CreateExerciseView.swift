@@ -52,5 +52,6 @@ struct V_CreateExerciseView2_Previews: PreviewProvider {
     static var previews: some View {
         V_CreateExerciseView()
             .environmentObject(MVC_ExerciseStorage())
+            .environmentObject(MVC_CreateExerciseSet())
     }
 }

@@ -16,6 +16,7 @@ class MVC_ExerciseStorage: ObservableObject {
             storeInUserDefaults()
         }
     }
+    private var colors = M_ColorScheme()
     private var userDefaultsKey: String {"ExerciseSetStore"}
     
     
@@ -59,6 +60,9 @@ class MVC_ExerciseStorage: ObservableObject {
         choosableWorkouts.chooseExerciseSet(nameOfExerciseSet: exerciseSet.name)
     }
     
+    func getThemeColors(type: TypeOfColor) -> Color {
+        colors.giveColor(typeOfColor: type)
+    }
     
     /// save persistent data
     private func storeInUserDefaults() {
@@ -79,5 +83,6 @@ class MVC_ExerciseStorage: ObservableObject {
             choosableWorkouts = decodedM_ChoosableExerciseSets
         }
     }
+    
 }
 
