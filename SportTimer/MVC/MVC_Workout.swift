@@ -26,12 +26,12 @@ class MVC_Workout: ObservableObject {
         self.currentExerciseSetForWorkout = nil
     }
     
-    func updateAnimationParameters(lengthOfNextIntervalInSeconds intervalLength: Double) {
+    func updateAnimationParameters(passedTime: Int) {
         print("################")
         print("OldCurrentEnd \(currentEndPoint)")
-        currentEndPoint = 1 - ((getRemainingTimeAsDouble()!-intervalLength) / getTotalTimeOfCurrentExercise()!)
+        currentEndPoint = ((Double(passedTime)+1) / Double(getTotalTimeOfCurrentExercise()!))
         print("NewCurrentEnd \(currentEndPoint)")
-        print("RemaingTime \(timerManager!.remainingTime)")
+        //print("RemaingTime \(timerManager!.remainingTime)")
         print("Total Time \(timerManager!.currentExercise.durationInSeconds)")
         
         print("################")
@@ -49,19 +49,19 @@ class MVC_Workout: ObservableObject {
     
     /// updated the time in the workout. So that internal parameters are updated
     /// - Parameter timeSinceLastUpdate: in seconds
-    func updateWorkoutTimer(timeSinceLastUpdate: Double) {
+    func nextExercise() {
         if timerManager != nil && timerManager!.hasStartedExercise {
-            if timerManager!.reduceRemainingTime(bySeconds: timeSinceLastUpdate) {
-                playSound(nextIsPause: timerManager!.currentExercise.isPause)
-            }
+            playSound(nextIsPause: timerManager!.currentExercise.isPause)
+            timerManager!.setToNextExercise()
         }
     }
+    
     
     /// Resets workout to start
     func resetWorkoutToStart() {
         if timerManager != nil {
             timerManager!.resetToStartValues()
-            currentEndPoint = 0
+            //currentEndPoint = 0
         }
     }
     
@@ -86,20 +86,18 @@ class MVC_Workout: ObservableObject {
     
     /// prints remaining seconds
     /// - Returns: remaining seconds as string
-    func printRemainingTime() -> String {
+    func printRemainingTime(passedTimeInSeconds remainingTime: Int) -> String {
         if timerManager != nil {
-            return String(format: "%.0f", timerManager!.remainingTime)
+            print(remainingTime)
+            print("total time \(timerManager!.currentExercise.durationInSeconds)")
+            return String(format: "%d", remainingTime)
         }
         return "Error in printRemainingTime() timerManager was nil"
     }
     
     
-    private func getTotalTimeOfCurrentExercise() -> Double? {
+    private func getTotalTimeOfCurrentExercise() -> Int? {
         return timerManager?.currentExercise.durationInSeconds
-    }
-    
-    private func getRemainingTimeAsDouble() -> Double? {
-        return timerManager?.remainingTime
     }
     
     struct parametersAnimation {
@@ -114,8 +112,7 @@ class MVC_Workout: ObservableObject {
         if setForWorkout.correctlyBuild() {
             currentExerciseSetForWorkout = setForWorkout
             let currentExercise = setForWorkout.exercises.first!
-            let remainingTime = currentExercise.durationInSeconds
-            timerManager = M_ExercisesForTimer(exerciseSet: setForWorkout, currentExercise: currentExercise, remainingTime: remainingTime, currentExercisePositionInArray: 0)
+            timerManager = M_ExercisesForTimer(exerciseSet: setForWorkout, currentExercise: currentExercise, currentExercisePositionInArray: 0)
             return true
         }
         timerManager = nil

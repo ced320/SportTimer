@@ -33,7 +33,7 @@ class MVC_CreateExerciseSet: ObservableObject {
     ///   - name: name of exercise
     ///   - isPause: isPause
     ///   - duration: in seconds
-    func addExerciseToExerciseSet(name: String, isPause: Bool, durationInSeconds duration: Double) {
+    func addExerciseToExerciseSet(name: String, isPause: Bool, durationInSeconds duration: Int) {
         if(name != "" && duration > 0) {
             exerciseSetBuilder.addExerciseToTemporarySet(nameOfExercise: name, isPause: isPause, durationInSeconds: duration)
         }

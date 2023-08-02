@@ -16,15 +16,9 @@ struct V_WorkoutView: View {
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var timerIsRunning = false
-    
-    //@State var animationCurrentEnd:CGFloat = 0.25
-    //@State var animationNextEnd:CGFloat = 0.75
-    
-    //@State var currentEndPoint1: CGFloat = 0
-    //@State var currentEndPoint2: CGFloat = 0
-    //@State var finalEndPoint: CGFloat = 0//The percent of the circle that will be filled in the next interval
-    let timeOfInterval: Double = 1
-    //@State var animationPoints: MVC_Workout.parametersAnimation?
+    @State var secondsToCompletion = 0
+    let timeOfInterval: Int = 1
+    @State var progress: Float = 0.0
     
     var body: some View {
         if(exerciseExecuter.timerManager == nil || !exerciseExecuter.timerManager!.hasStartedExercise) {
@@ -32,9 +26,9 @@ struct V_WorkoutView: View {
         } else {
             exerciseView
                 .onDisappear{
-                    withAnimation {
+                    //withAnimation {
                         exerciseExecuter.resetWorkoutToStart()
-                    }
+                    //}
                 }
         }
     }
@@ -57,13 +51,14 @@ struct V_WorkoutView: View {
                     .frame(width: 180, height: 180)
                     .foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
                     .onTapGesture {
-                        withAnimation {
+                        //withAnimation {
                             //exerciseExecuter.resetWorkoutToStart()
                             exerciseExecuter.startWorkout(withThisExerciseSet: exerciseSetStorage.getSelectedExerciseSet())
-                            //exerciseExecuter.updateAnimationParameters(lengthOfNextIntervalInSeconds: timeOfInterval)
+                            secondsToCompletion = exerciseExecuter.timerManager!.currentExercise.durationInSeconds
+                            //exerciseExecuter.updateAnimationParameters(passedTime: secondsToCompletion)
                             //exerciseExecuter.printRemainingTime()
                             timerIsRunning = true
-                        }
+                        //}
                     }
                 Spacer()
                 Text("Press button to start Training")
@@ -86,80 +81,35 @@ struct V_WorkoutView: View {
                 } else {
                     showCurrentExerciseView
                 }
-                Text(exerciseExecuter.printRemainingTime())
-                    .font(.system(size: 120))
-                animatedTimer
-                    .onAppear {
-                        withAnimation(.linear(duration: self.timeOfInterval)) {
-                            exerciseExecuter.updateAnimationParameters(lengthOfNextIntervalInSeconds: 1)
-                        }
-                    }
-                Text("Time left:")
-                    .font(.subheadline)
+                ZStack {
+                    Text(exerciseExecuter.printRemainingTime(passedTimeInSeconds: secondsToCompletion))
+                        .font(.system(size: 120))
+                    CircularProgressView(progress: $progress)
+                }
                 resetButtonView
             }
             .onReceive(timer) { time in
                 if timerIsRunning {
-                    
-                    
-                        
-                    
-                    exerciseExecuter.updateWorkoutTimer(timeSinceLastUpdate: 1)
-                    if exerciseExecuter.currentEndPoint < 0.99 {
-                        withAnimation(.linear(duration: self.timeOfInterval)) {
-                            exerciseExecuter.updateAnimationParameters(lengthOfNextIntervalInSeconds: timeOfInterval)
-
-                            //currentEndPoint2 = exerciseExecuter.calcParametersForAnimation(lengthOfNextTimeIntervalInSeconds: 1)!.newEndPoint
-                        }
+                    secondsToCompletion -= 1
+                    if(progress >= 0.7) {
+                        progress = Float(Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)-Float(secondsToCompletion)) / Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)
                     } else {
-                        exerciseExecuter.updateAnimationParameters(lengthOfNextIntervalInSeconds: timeOfInterval)
-                        exerciseExecuter.currentEndPoint = 0
+                        //withAnimation(.linear(duration: Double(self.timeOfInterval))) {
+                            exerciseExecuter.updateAnimationParameters(passedTime: secondsToCompletion)//TODO Remove
+                            progress = Float(Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)-Float(secondsToCompletion)) / Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)
+                        //}
                     }
-                    
-
 
                     
-                    
+                    if(secondsToCompletion < 0) {
+                        exerciseExecuter.nextExercise()
+                        secondsToCompletion = exerciseExecuter.timerManager!.currentExercise.durationInSeconds
+                        progress = 0
+                    }
                 }
             }
         }
     }
-    
-    var animatedTimer: some View {
-        VStack {
-            ZStack {
-                Circle()
-                    .trim(from: 0, to: exerciseExecuter.currentEndPoint)
-                    .stroke(LinearGradient(gradient: Gradient(colors: [.red]),
-                                           startPoint: .topLeading,
-                                           endPoint: .bottomTrailing),
-                            style: .init(lineWidth: 10, lineCap: .round))
-                    .frame(width: 320, height: 320)
-                    .opacity(1)
-//                Circle()
-//                    .trim(from: exerciseExecuter.currentEndPoint1, to: exerciseExecuter.finalEndPoint)
-//                    .stroke(LinearGradient(gradient: Gradient(colors: [.blue]),
-//                                           startPoint: .topLeading,
-//                                           endPoint: .bottomTrailing),
-//                            style: .init(lineWidth: 10, lineCap: .round))
-//                    .frame(width: 320, height: 320)
-//                    .opacity(0.5)
-//                    .onReceive(timer) { time in
-//                        if timerIsRunning {
-//                            exerciseExecuter.updateWorkoutTimer(timeSinceLastUpdate: 1)
-//                                withAnimation(.linear(duration: self.timeOfInterval)) {
-//                                    exerciseExecuter.updateAnimationParameters(lengthOfNextIntervalInSeconds: timeOfInterval)
-//
-//                                    //currentEndPoint2 = exerciseExecuter.calcParametersForAnimation(lengthOfNextTimeIntervalInSeconds: 1)!.newEndPoint
-//                                }
-//
-//                        }
-//                    }
-            }
-                
-        }
-    }
-    
     ///View that is shown if the workout is in a pause
     var showCurrentExerciseView: some View {
         ZStack {
@@ -211,6 +161,8 @@ struct V_WorkoutView: View {
             }.padding()
             .onTapGesture {
                 exerciseExecuter.resetWorkoutToStart()
+                secondsToCompletion = 0
+                progress = 0
             }.foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
     }
 }

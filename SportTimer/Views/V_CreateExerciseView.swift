@@ -38,8 +38,8 @@ struct V_CreateExerciseView: View {
                 }//.background(exerciseChooser.getThemeColors(type: .background, colorScheme: colorScheme))
                    // .scrollContentBackground(.hidden)
                 Button("Add exercise to set") {
-                    let durationExercise = Double(durationOfExercise)
-                    let durationPause = Double(durationOfPause)
+                    let durationExercise = Int(durationOfExercise)
+                    let durationPause = Int(durationOfPause)
                     
                     if durationExercise != nil && durationPause != nil && durationExercise! > 0 && durationPause! > 0 && nameOfExercise != "" {
                         createExercise.addExerciseToExerciseSet(name: nameOfExercise, isPause: false, durationInSeconds: durationExercise!)

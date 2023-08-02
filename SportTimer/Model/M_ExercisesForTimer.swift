@@ -14,21 +14,22 @@ struct M_ExercisesForTimer {
     private(set) var exerciseSet: M_ExerciseSet
     private(set) var currentExercise : M_Exercise
     private(set) var hasStartedExercise = false
-    private(set) var remainingTime: Double
+    //private(set) var remainingTime: Double
     private(set) var currentExercisePositionInArray: Int
     
     
     /// reduce the internal remaining time
     /// - Parameter sec: in seconds
     /// - Returns: true if time has been reduced false else
-    mutating func reduceRemainingTime(bySeconds sec: Double) -> Bool {
-        remainingTime -= sec
-        if remainingTime <= 0 {
-            setToNextExercise()
-            return true
-        }
-        return false
-    }
+//    mutating func reduceRemainingTime(bySeconds sec: Double) -> Bool {
+//        remainingTime -= sec
+//        if remainingTime <= 0 {
+//            setToNextExercise()
+//            return true
+//        }
+//        return false
+//    }
+    
     
     /// sets the internal parameter has started to the given bool parameter
     /// - Parameter newValueForHasStarted: newValueForHasStarted
@@ -49,14 +50,14 @@ struct M_ExercisesForTimer {
             resetToStartValues()
             return
         }
-        remainingTime = currentExercise.durationInSeconds
+        //remainingTime = currentExercise.durationInSeconds
     }
     
     
     /// resets the internal values to a state right before the workout starts
     mutating func resetToStartValues() {
         currentExercise = exerciseSet.exercises.first!
-        remainingTime = currentExercise.durationInSeconds
+        //remainingTime = currentExercise.durationInSeconds
         hasStartedExercise = false
         currentExercisePositionInArray = 0
     }

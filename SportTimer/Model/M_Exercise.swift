@@ -13,7 +13,7 @@ struct M_Exercise: Codable, Identifiable {
     let id: Int
     let name: String
     let isPause: Bool
-    private(set) var durationInSeconds: Double
+    private(set) var durationInSeconds: Int
     
     /// standart initiator
     /// - Parameters:
@@ -21,7 +21,7 @@ struct M_Exercise: Codable, Identifiable {
     ///   - name: name of the exercise
     ///   - isPause: true if break false if exercise
     ///   - durationInSeconds: how long does the exercise take
-    init(uniqueId: Int, name: String, isPause: Bool, durationInSeconds: Double) {
+    init(uniqueId: Int, name: String, isPause: Bool, durationInSeconds: Int) {
         self.id = uniqueId
         self.name = name
         self.isPause = isPause

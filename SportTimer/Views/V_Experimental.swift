@@ -7,51 +7,64 @@
 
 import SwiftUI
 
-struct V_Experimental: View {
+struct CircularProgressView: View {
 
-
-    let duration: TimeInterval = 5
-    @State var start: CGFloat = 0
-    @State var end: CGFloat = 0
+    @EnvironmentObject var exerciseSetStorage: MVC_ExerciseStorage
+    @Binding var progress: Float
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        VStack {
-            Circle()
-                .trim(from: start, to: end)
-                .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .red]),
-                                       startPoint: .topLeading,
-                                       endPoint: .bottomTrailing),
-                        style: .init(lineWidth: 4, lineCap: .round))
-                .frame(width: 320, height: 320)
-                
-            Spacer()
-        }.onAppear {
-            Timer.scheduledTimer(withTimeInterval: self.duration,  // Fill Timer
-                                 repeats: true) { _ in
-                self.start = 0
-                self.end = 0
-                withAnimation(.linear(duration: self.duration/2)) {
-                    self.end = 1
-                }
-            }.fire()
-            Timer.scheduledTimer(withTimeInterval: self.duration/2,  // Delay Timer
-                                 repeats: false) { _ in
-                Timer.scheduledTimer(withTimeInterval: self.duration,  // Clear Timer
-                                     repeats: true) { _ in
-                    withAnimation(.linear(duration: 0.1)) {
-                        self.start = 1
-                    }
-                }.fire()
-            }
+        withAnimation
         }
+    
+    var withAnimation: some View {
+        ZStack {
+            Circle()
+                .stroke(lineWidth: 8.0)
+                .opacity(0.1)
+                .foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
+            Circle()
+                .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
+                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
+                .foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
+            // Ensures the animation starts from 12 o'clock
+                .rotationEffect(Angle(degrees: 270))
+        }
+        // The progress animation will animate over 1 second which
+        // allows for a continuous smooth update of the ProgressView
+        .animation(.linear(duration: 1), value: progress)
         
     }
+    
+//    var withoutAnimation: some View {
+//        ZStack {
+//            Circle()
+//                .stroke(lineWidth: 8.0)
+//                .opacity(0.3)
+//                .foregroundColor(.blue)
+//            Circle()
+//                .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
+//                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
+//                .foregroundColor(.yellow)
+//            // Ensures the animation starts from 12 o'clock
+//                .rotationEffect(Angle(degrees: 270))
+//        }
+        // The progress animation will animate over 1 second which
+        // allows for a continuous smooth update of the ProgressView
+        //.animation(.linear(duration: 1), value: progress)
+    //}
 }
 
 
-
+struct BindingView : View {
+    @State private var progress:Float = 0.5
+    
+    var body: some View {
+        CircularProgressView(progress: $progress)
+    }
+}
 struct V_Experimental_Previews: PreviewProvider {
     static var previews: some View {
-        V_Experimental()
+        BindingView()
     }
 }

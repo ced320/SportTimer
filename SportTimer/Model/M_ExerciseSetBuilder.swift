@@ -20,7 +20,7 @@ struct M_ExerciseSetBuilder {
     ///   - name: name
     ///   - isPause: isPause
     ///   - duration: duration has to be > 0
-    mutating func addExerciseToTemporarySet(nameOfExercise name: String, isPause: Bool, durationInSeconds duration:Double) {
+    mutating func addExerciseToTemporarySet(nameOfExercise name: String, isPause: Bool, durationInSeconds duration:Int) {
         if duration > 0  {
             let exercise = M_Exercise(uniqueId: makeNewUniqueExerciseId(), name: name, isPause: isPause, durationInSeconds: duration)
             exerciseSetThatShallBeAdded.append(exercise)
