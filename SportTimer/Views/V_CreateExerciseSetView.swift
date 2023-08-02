@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct V_CreateExerciseSetView: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var exerciseChooser: MVC_ExerciseStorage
     @EnvironmentObject var createExerciseSet: MVC_CreateExerciseSet
     
@@ -16,22 +16,35 @@ struct V_CreateExerciseSetView: View {
     @State var showWarning = false
     
     var body: some View {
-
-        NavigationStack {
-            Form {
-                resetExercisesCreated
-                Section("Name of ExerciseSet") {
-                    nameSection
-                }
-                Section("Add Exercise") {
-                    NavigationLink("Add new Exercise") {
-                        exerciseSection
+        ZStack {
+            RoundedRectangle(cornerRadius: 0)
+                .foregroundColor(exerciseChooser.getThemeColors(type: .background, colorScheme: colorScheme))
+                .ignoresSafeArea()
+            VStack {
+                Text("Add Exercise set")
+                    .font(.title)
+                    .foregroundColor(exerciseChooser.getThemeColors(type: .primary, colorScheme: colorScheme))
+                Form {
+                    resetExercisesCreated
+                    Section("Name of ExerciseSet") {
+                        if(testSaver1 == "") {
+                            nameSection.foregroundColor(.red)
+                        } else {
+                            nameSection.foregroundColor(.green)
+                        }
                     }
-                }
-                createExerciseSection
-                Section("Exercise added") {
-                    V_addedExerciseView()
-                }
+                    Section("Add Exercise") {
+                        NavigationLink("Add new Exercise") {
+                            exerciseSection
+                        }
+                    }
+                    createExerciseSection
+                    Section("Already added Exercises") {
+                        V_addedExerciseView()
+                    }
+                }//.background(exerciseChooser.getThemeColors(type: .background, colorScheme: colorScheme))
+                    //.scrollContentBackground(.hidden)
+                    //.foregroundColor(exerciseChooser.getThemeColors(type: .primary, colorScheme: colorScheme))
             }
         }
     }
@@ -64,7 +77,7 @@ struct V_CreateExerciseSetView: View {
                     let temporarySet = createExerciseSet.addExerciseSet(nameOfSet: testSaver1)!
                     exerciseChooser.createExerciseSet(nameOfExerciseSet: temporarySet.name, exercisesOfSet: temporarySet.exercises)
                 }
-            }
+            }.foregroundColor(.green)
         }
         else {
             Button("Add exercise-set-name and/or exercises first!") {

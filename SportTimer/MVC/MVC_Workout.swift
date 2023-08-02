@@ -17,14 +17,27 @@ class MVC_Workout: ObservableObject {
     @Published private(set) var currentExerciseSetForWorkout: M_ExerciseSet?
     @Published private(set) var timerManager : M_ExercisesForTimer?
     private var player: AVAudioPlayer!
-    
+    //for animation
+    @Published var currentEndPoint: CGFloat = 0
+    //@Published var timeOfInterval: Double = 1
     
     /// Used to model the workout process
     init() {
         self.currentExerciseSetForWorkout = nil
     }
     
+    func updateAnimationParameters(lengthOfNextIntervalInSeconds intervalLength: Double) {
+        print("################")
+        print("OldCurrentEnd \(currentEndPoint)")
+        currentEndPoint = 1 - ((getRemainingTimeAsDouble()!-intervalLength) / getTotalTimeOfCurrentExercise()!)
+        print("NewCurrentEnd \(currentEndPoint)")
+        print("RemaingTime \(timerManager!.remainingTime)")
+        print("Total Time \(timerManager!.currentExercise.durationInSeconds)")
+        
+        print("################")
+    }
     
+
     /// sets workout to has started
     /// - Parameter withThisExerciseSet: the exerciseSet that is used for the current workout
     /// - Returns: Void
@@ -48,10 +61,11 @@ class MVC_Workout: ObservableObject {
     func resetWorkoutToStart() {
         if timerManager != nil {
             timerManager!.resetToStartValues()
+            currentEndPoint = 0
         }
     }
     
-    /// as function names implies
+    /// as function names implies/Users/cedricfrimmel-hoffmann/Developer/SportTimer/SportTimer/MVC/MVC_CreateExerciseSet.swift
     /// - Returns: the current exercise name
     func showCurrentExerciseName() -> String {
         if timerManager != nil {
@@ -77,6 +91,20 @@ class MVC_Workout: ObservableObject {
             return String(format: "%.0f", timerManager!.remainingTime)
         }
         return "Error in printRemainingTime() timerManager was nil"
+    }
+    
+    
+    private func getTotalTimeOfCurrentExercise() -> Double? {
+        return timerManager?.currentExercise.durationInSeconds
+    }
+    
+    private func getRemainingTimeAsDouble() -> Double? {
+        return timerManager?.remainingTime
+    }
+    
+    struct parametersAnimation {
+        let currentEndpoint: CGFloat
+        let newEndPoint: CGFloat
     }
     
     /// Setups the workout for the next workout

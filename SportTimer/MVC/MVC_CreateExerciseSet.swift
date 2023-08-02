@@ -53,6 +53,7 @@ class MVC_CreateExerciseSet: ObservableObject {
         return exerciseSetBuilder.wellBuildTemporarySet()
     }
     
+
     
     
 }

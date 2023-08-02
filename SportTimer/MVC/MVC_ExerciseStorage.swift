@@ -25,8 +25,8 @@ class MVC_ExerciseStorage: ObservableObject {
     /// 2. Way) If there is no choosableWorkouts a standard initialiser is chosen
     init() {
         choosableWorkouts = M_ChoosableExerciseSets(basicInit: true)
-        //deleteUserDefaults()
-        restoreFromUserDefaults()
+        deleteUserDefaults()
+        //restoreFromUserDefaults()
     }
     
     /// creates exerciseSets and adds it choosableWorkouts if the given name is not ""
@@ -60,8 +60,8 @@ class MVC_ExerciseStorage: ObservableObject {
         choosableWorkouts.chooseExerciseSet(nameOfExerciseSet: exerciseSet.name)
     }
     
-    func getThemeColors(type: TypeOfColor) -> Color {
-        colors.giveColor(typeOfColor: type)
+    func getThemeColors(type: TypeOfColor, colorScheme: ColorScheme) -> Color {
+        colors.giveColor(typeOfColor: type, darkMode: colorScheme)
     }
     
     /// save persistent data

@@ -17,32 +17,43 @@ struct V_CreateExerciseView: View {
     @State var durationOfExercise: String = ""
     @State var warningForWrongInput = false
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
-        VStack {
-            List {
-                TextField("Name", text: $nameOfExercise)
-                TextField("durationOfExercise", text: $durationOfExercise)
-                TextField("durationOfPause", text: $durationOfPause)
-            }
-            Button("Add exercise to set") {
-                let durationExercise = Double(durationOfExercise)
-                let durationPause = Double(durationOfPause)
-                
-                if durationExercise != nil && durationPause != nil && durationExercise! > 0 && durationPause! > 0 && nameOfExercise != "" {
-                    createExercise.addExerciseToExerciseSet(name: nameOfExercise, isPause: false, durationInSeconds: durationExercise!)
-                    createExercise.addExerciseToExerciseSet(name: "Break", isPause: true, durationInSeconds: durationPause!)
-                    nameOfExercise = ""
-                    durationOfPause = ""
-                    durationOfExercise = ""
-                } else {
-                    warningForWrongInput = true
+        ZStack {
+            RoundedRectangle(cornerRadius: 0)
+                .foregroundColor(exerciseChooser.getThemeColors(type: .background, colorScheme: colorScheme))
+                .ignoresSafeArea()
+            VStack {
+                Text("Create Exercise")
+                    .font(.title)
+                    .foregroundColor(exerciseChooser.getThemeColors(type: .primary, colorScheme: colorScheme))
+                V_addedExerciseView()
+                    .environmentObject(exerciseChooser)
+                    .padding(.all, 20)
+                List {
+                    TextField("Name", text: $nameOfExercise)
+                    TextField("durationOfExercise", text: $durationOfExercise)
+                    TextField("durationOfPause", text: $durationOfPause)
+                }//.background(exerciseChooser.getThemeColors(type: .background, colorScheme: colorScheme))
+                   // .scrollContentBackground(.hidden)
+                Button("Add exercise to set") {
+                    let durationExercise = Double(durationOfExercise)
+                    let durationPause = Double(durationOfPause)
+                    
+                    if durationExercise != nil && durationPause != nil && durationExercise! > 0 && durationPause! > 0 && nameOfExercise != "" {
+                        createExercise.addExerciseToExerciseSet(name: nameOfExercise, isPause: false, durationInSeconds: durationExercise!)
+                        createExercise.addExerciseToExerciseSet(name: "Break", isPause: true, durationInSeconds: durationPause!)
+                        nameOfExercise = ""
+                        durationOfPause = ""
+                        durationOfExercise = ""
+                    } else {
+                        warningForWrongInput = true
+                    }
+                }.alert("Wrong input/s!", isPresented: $warningForWrongInput) {
+                    
                 }
-            }.alert("Wrong input/s!", isPresented: $warningForWrongInput) {
-                
-            }
-            
-            V_addedExerciseView()
-                .environmentObject(exerciseChooser)
+            }.frame(alignment: .bottom)
         }
     }
     
