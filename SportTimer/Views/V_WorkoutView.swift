@@ -19,6 +19,7 @@ struct V_WorkoutView: View {
     @State var secondsToCompletion = 0
     let timeOfInterval: Int = 1
     @State var progress: Float = 0.0
+    @State var animationToggle = false
     
     var body: some View {
         if(exerciseExecuter.timerManager == nil || !exerciseExecuter.timerManager!.hasStartedExercise) {
@@ -84,27 +85,26 @@ struct V_WorkoutView: View {
                 ZStack {
                     Text(exerciseExecuter.printRemainingTime(passedTimeInSeconds: secondsToCompletion))
                         .font(.system(size: 120))
-                    CircularProgressView(progress: $progress)
+                    if animationToggle {
+                        CircularProgressView(progress: $progress)
+                    } else {
+                        CircularProgressView(progress: $progress)
+                    }
+                    
                 }
                 resetButtonView
             }
             .onReceive(timer) { time in
                 if timerIsRunning {
                     secondsToCompletion -= 1
-                    if(progress >= 0.7) {
                         progress = Float(Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)-Float(secondsToCompletion)) / Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)
-                    } else {
-                        //withAnimation(.linear(duration: Double(self.timeOfInterval))) {
-                            exerciseExecuter.updateAnimationParameters(passedTime: secondsToCompletion)//TODO Remove
-                            progress = Float(Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)-Float(secondsToCompletion)) / Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)
-                        //}
-                    }
 
                     
                     if(secondsToCompletion < 0) {
                         exerciseExecuter.nextExercise()
                         secondsToCompletion = exerciseExecuter.timerManager!.currentExercise.durationInSeconds
                         progress = 0
+                        animationToggle.toggle()
                     }
                 }
             }

@@ -14,7 +14,7 @@ struct CircularProgressView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        withAnimation
+            withAnimation
         }
     
     var withAnimation: some View {
@@ -36,28 +36,29 @@ struct CircularProgressView: View {
         
     }
     
-//    var withoutAnimation: some View {
-//        ZStack {
-//            Circle()
-//                .stroke(lineWidth: 8.0)
-//                .opacity(0.3)
-//                .foregroundColor(.blue)
-//            Circle()
-//                .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
-//                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
-//                .foregroundColor(.yellow)
-//            // Ensures the animation starts from 12 o'clock
-//                .rotationEffect(Angle(degrees: 270))
-//        }
-        // The progress animation will animate over 1 second which
-        // allows for a continuous smooth update of the ProgressView
+    var withoutAnimation: some View {
+        ZStack {
+            Circle()
+                .stroke(lineWidth: 8.0)
+                .opacity(0.3)
+                .foregroundColor(.blue)
+            Circle()
+                .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
+                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
+                .foregroundColor(.yellow)
+            // Ensures the animation starts from 12 o'clock
+                .rotationEffect(Angle(degrees: 270))
+        }
+         //The progress animation will animate over 1 second which
+         //allows for a continuous smooth update of the ProgressView
         //.animation(.linear(duration: 1), value: progress)
-    //}
+    }
 }
 
 
 struct BindingView : View {
     @State private var progress:Float = 0.5
+    @State private var progressOld:Float = 0.3
     
     var body: some View {
         CircularProgressView(progress: $progress)
