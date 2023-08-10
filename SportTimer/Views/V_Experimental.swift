@@ -20,38 +20,20 @@ struct CircularProgressView: View {
     var withAnimation: some View {
         ZStack {
             Circle()
-                .stroke(lineWidth: 8.0)
+                .stroke(lineWidth: 16.0)
                 .opacity(0.1)
                 .foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
+                .stroke(style: StrokeStyle(lineWidth: 16.0, lineCap: .round, lineJoin: .round))
                 .foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
             // Ensures the animation starts from 12 o'clock
                 .rotationEffect(Angle(degrees: 270))
         }
         // The progress animation will animate over 1 second which
         // allows for a continuous smooth update of the ProgressView
-        .animation(.linear(duration: 1), value: progress)
+        .animation(.linear(duration: Double(1/Double(animationConstants.multiplicationTimeFactor))+animationConstants.animationEpsilon), value: progress)
         
-    }
-    
-    var withoutAnimation: some View {
-        ZStack {
-            Circle()
-                .stroke(lineWidth: 8.0)
-                .opacity(0.3)
-                .foregroundColor(.blue)
-            Circle()
-                .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
-                .foregroundColor(.yellow)
-            // Ensures the animation starts from 12 o'clock
-                .rotationEffect(Angle(degrees: 270))
-        }
-         //The progress animation will animate over 1 second which
-         //allows for a continuous smooth update of the ProgressView
-        //.animation(.linear(duration: 1), value: progress)
     }
 }
 

@@ -14,11 +14,12 @@ struct V_WorkoutView: View {
     //@State 
     @Environment(\.colorScheme) var colorScheme
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: TimeInterval(1.0/Double(animationConstants.multiplicationTimeFactor)), on: .main, in: .common).autoconnect()
     @State var timerIsRunning = false
     @State var secondsToCompletion = 0
-    let timeOfInterval: Int = 1
+    //let timeOfInterval: Int = 1
     @State var progress: Float = 0.0
+    @State var progress2: Float = 0.0
     @State var animationToggle = false
     
     var body: some View {
@@ -27,9 +28,7 @@ struct V_WorkoutView: View {
         } else {
             exerciseView
                 .onDisappear{
-                    //withAnimation {
-                        exerciseExecuter.resetWorkoutToStart()
-                    //}
+                    exerciseExecuter.resetWorkoutToStart()
                 }
         }
     }
@@ -55,7 +54,7 @@ struct V_WorkoutView: View {
                         //withAnimation {
                             //exerciseExecuter.resetWorkoutToStart()
                             exerciseExecuter.startWorkout(withThisExerciseSet: exerciseSetStorage.getSelectedExerciseSet())
-                            secondsToCompletion = exerciseExecuter.timerManager!.currentExercise.durationInSeconds
+                        secondsToCompletion = exerciseExecuter.timerManager!.currentExercise.durationInSeconds * animationConstants.multiplicationTimeFactor
                             //exerciseExecuter.updateAnimationParameters(passedTime: secondsToCompletion)
                             //exerciseExecuter.printRemainingTime()
                             timerIsRunning = true
@@ -71,44 +70,58 @@ struct V_WorkoutView: View {
     
     ///View that is seen when the workout is started
     var exerciseView: some View {
-        //V_Experimental()
-        ZStack {
-            Rectangle()
-                .foregroundColor(exerciseSetStorage.getThemeColors(type: .background, colorScheme: colorScheme))
-                .ignoresSafeArea()
-            VStack {
-                if(exerciseExecuter.timerManager!.currentExercise.isPause) {
-                    showPauseView
-                } else {
-                    showCurrentExerciseView
-                }
-                ZStack {
-                    Text(exerciseExecuter.printRemainingTime(passedTimeInSeconds: secondsToCompletion))
-                        .font(.system(size: 120))
-                    if animationToggle {
-                        CircularProgressView(progress: $progress)
+        GeometryReader { geo in
+            ZStack {
+                Rectangle()
+                    .foregroundColor(exerciseSetStorage.getThemeColors(type: .background, colorScheme: colorScheme))
+                    .ignoresSafeArea()
+                VStack {
+                    if(exerciseExecuter.timerManager!.currentExercise.isPause) {
+                        showPauseView
                     } else {
-                        CircularProgressView(progress: $progress)
+                        showCurrentExerciseView
                     }
-                    
-                }
-                resetButtonView
-            }
-            .onReceive(timer) { time in
-                if timerIsRunning {
-                    secondsToCompletion -= 1
-                        progress = Float(Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)-Float(secondsToCompletion)) / Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds)
-
-                    
-                    if(secondsToCompletion < 0) {
-                        exerciseExecuter.nextExercise()
-                        secondsToCompletion = exerciseExecuter.timerManager!.currentExercise.durationInSeconds
-                        progress = 0
-                        animationToggle.toggle()
+                    ZStack {
+                        Text(exerciseExecuter.printRemainingTime(passedTimeInSeconds: secondsToCompletion, timeMultiplicationFactor: animationConstants.multiplicationTimeFactor))
+                            .font(.system(size: geo.size.height/5))
+                            .bold()
+                        //If else prevents animation from going backwards
+                        if animationToggle {
+                            CircularProgressView(progress: $progress)
+                        } else {
+                            CircularProgressView(progress: $progress2)
+                        }
+                    }
+                    Text("Tap to pause")
+                        .font(.footnote).padding(.all)
+                    //resetButtonView
+                }.frame(width: geo.size.width,height: geo.size.height)
+                    .padding(.all)
+                .onReceive(timer) { time in
+                    if timerIsRunning {
+                        secondsToCompletion -= 1
+                        if animationToggle {
+                            progress = Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds*animationConstants.multiplicationTimeFactor-secondsToCompletion) / Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds*animationConstants.multiplicationTimeFactor)
+                        } else {
+                            progress2 = Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds*animationConstants.multiplicationTimeFactor-secondsToCompletion) / Float(exerciseExecuter.timerManager!.currentExercise.durationInSeconds*animationConstants.multiplicationTimeFactor)
+                        }
+                        if(secondsToCompletion < 0) {
+                            exerciseExecuter.nextExercise()
+                            secondsToCompletion = exerciseExecuter.timerManager!.currentExercise.durationInSeconds*animationConstants.multiplicationTimeFactor
+                            if animationToggle {
+                                progress = 0
+                            } else {
+                                progress2 = 0
+                            }
+                            animationToggle.toggle()
+                        }
                     }
                 }
+            }.onTapGesture {
+                timerIsRunning.toggle()
             }
         }
+
     }
     ///View that is shown if the workout is in a pause
     var showCurrentExerciseView: some View {
@@ -119,10 +132,6 @@ struct V_WorkoutView: View {
             VStack {
                 Text("Current Exercise:")
                 Text(exerciseExecuter.timerManager!.currentExercise.name)
-                Image(systemName: "pause.circle")
-                    .onTapGesture {
-                        timerIsRunning.toggle()
-                    }
             }
             .font(.largeTitle)
             .foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
@@ -142,10 +151,6 @@ struct V_WorkoutView: View {
                 Text("Next Exercise:")
                 Text(exerciseExecuter.showNextExerciseName())
                     .opacity(0.6)
-                Image(systemName: "pause.circle")
-                    .onTapGesture {
-                        timerIsRunning.toggle()
-                    }
             }
             .font(.largeTitle)
             .foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
@@ -163,6 +168,7 @@ struct V_WorkoutView: View {
                 exerciseExecuter.resetWorkoutToStart()
                 secondsToCompletion = 0
                 progress = 0
+                progress2 = progress
             }.foregroundColor(exerciseSetStorage.getThemeColors(type: .primary, colorScheme: colorScheme))
     }
 }
@@ -172,4 +178,9 @@ struct V_ExerciseProgressView_Previews: PreviewProvider {
         V_WorkoutView()
             .environmentObject(MVC_ExerciseStorage())
     }
+}
+
+struct animationConstants {
+    static let multiplicationTimeFactor = 10
+    static let animationEpsilon:Double = 0.1
 }

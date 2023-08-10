@@ -86,11 +86,11 @@ class MVC_Workout: ObservableObject {
     
     /// prints remaining seconds
     /// - Returns: remaining seconds as string
-    func printRemainingTime(passedTimeInSeconds remainingTime: Int) -> String {
+    func printRemainingTime(passedTimeInSeconds remainingTime: Int, timeMultiplicationFactor: Int) -> String {
         if timerManager != nil {
-            print(remainingTime)
+            //print(remainingTime)
             print("total time \(timerManager!.currentExercise.durationInSeconds)")
-            return String(format: "%d", remainingTime)
+            return String(format: "%d", remainingTime/timeMultiplicationFactor)
         }
         return "Error in printRemainingTime() timerManager was nil"
     }

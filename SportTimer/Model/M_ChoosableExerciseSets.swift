@@ -19,7 +19,7 @@ struct M_ChoosableExerciseSets: Codable {
     init(basicInit: Bool) {
         var exercises = [M_Exercise]()
         let p1 = M_Exercise(uniqueId: 0, name: "1Pause1", isPause: true, durationInSeconds: 4)
-        let exercise1 = M_Exercise(uniqueId: 1, name: "1e1", isPause: false, durationInSeconds: 4)
+        let exercise1 = M_Exercise(uniqueId: 1, name: "1e1", isPause: false, durationInSeconds: 20)
         let p2 = M_Exercise(uniqueId: 2, name: "1Pause2", isPause: true, durationInSeconds: 4)
         let exercise2 = M_Exercise(uniqueId: 3, name: "1e2", isPause: false, durationInSeconds: 4)
         let p3 = M_Exercise(uniqueId: 4, name: "1Pause3", isPause: true, durationInSeconds: 4)
