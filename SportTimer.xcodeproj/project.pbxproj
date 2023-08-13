@@ -18,8 +18,6 @@
 		902A3D682A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902A3D672A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift */; };
 		902A3D6A2A6FDD8300F5C78C /* MVC_Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902A3D692A6FDD8300F5C78C /* MVC_Workout.swift */; };
 		90669B012A7A8B50000A5764 /* V_Experimental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90669B002A7A8B50000A5764 /* V_Experimental.swift */; };
-		90669B032A7AE8FD000A5764 /* V_ExWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90669B022A7AE8FD000A5764 /* V_ExWorkoutView.swift */; };
-		90669B052A7AEBA7000A5764 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90669B042A7AEBA7000A5764 /* TimerPickerView.swift */; };
 		90669B072A7AEC28000A5764 /* E_Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90669B062A7AEC28000A5764 /* E_Int.swift */; };
 		90ADA7932A75356A00053AEA /* M_ChoosableExerciseSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ADA7922A75356A00053AEA /* M_ChoosableExerciseSets.swift */; };
 		90B2198029E8071E00E0DAD7 /* V_AvailableExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */; };
@@ -67,8 +65,6 @@
 		902A3D672A6FDD6A00F5C78C /* MVC_ExerciseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_ExerciseStorage.swift; sourceTree = "<group>"; };
 		902A3D692A6FDD8300F5C78C /* MVC_Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_Workout.swift; sourceTree = "<group>"; };
 		90669B002A7A8B50000A5764 /* V_Experimental.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_Experimental.swift; sourceTree = "<group>"; };
-		90669B022A7AE8FD000A5764 /* V_ExWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_ExWorkoutView.swift; sourceTree = "<group>"; };
-		90669B042A7AEBA7000A5764 /* TimerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
 		90669B062A7AEC28000A5764 /* E_Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = E_Int.swift; sourceTree = "<group>"; };
 		90ADA7922A75356A00053AEA /* M_ChoosableExerciseSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M_ChoosableExerciseSets.swift; sourceTree = "<group>"; };
 		90B2197F29E8071E00E0DAD7 /* V_AvailableExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V_AvailableExercises.swift; sourceTree = "<group>"; };
@@ -218,8 +214,6 @@
 				90C23D6129F13A4D00767871 /* V_addedExerciseView.swift */,
 				901E26322A72D5480002D834 /* V_WorkoutView.swift */,
 				90669B002A7A8B50000A5764 /* V_Experimental.swift */,
-				90669B022A7AE8FD000A5764 /* V_ExWorkoutView.swift */,
-				90669B042A7AEBA7000A5764 /* TimerPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -373,14 +367,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90669B032A7AE8FD000A5764 /* V_ExWorkoutView.swift in Sources */,
 				90669B072A7AEC28000A5764 /* E_Int.swift in Sources */,
 				902762EE2A77AAD100DAEB30 /* M_ColorScheme.swift in Sources */,
 				901B9F9829EAB4210081032F /* V_CreateExerciseView.swift in Sources */,
 				90C23D6029F122FC00767871 /* M_ExerciseSetBuilder.swift in Sources */,
 				901B9F9629EAABB70081032F /* V_CreateExerciseSetView.swift in Sources */,
 				902762EB2A77A89400DAEB30 /* E_Color.swift in Sources */,
-				90669B052A7AEBA7000A5764 /* TimerPickerView.swift in Sources */,
 				902A3D6A2A6FDD8300F5C78C /* MVC_Workout.swift in Sources */,
 				901E26332A72D5480002D834 /* V_WorkoutView.swift in Sources */,
 				901E26312A72B0D30002D834 /* MVC_CreateExerciseSet.swift in Sources */,
