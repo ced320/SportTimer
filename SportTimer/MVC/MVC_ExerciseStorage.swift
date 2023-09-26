@@ -37,7 +37,16 @@ class MVC_ExerciseStorage: ObservableObject {
         if(nameOfExerciseSet == "") {
             return
         }
-        choosableWorkouts.createNewExerciseSet(name: nameOfExerciseSet, exercises: exercisesOfSet)
+        var copiedExerciseSet = exercisesOfSet
+        //remove the last element of the exerciseSet if its a break
+        if exercisesOfSet.contains(where: {element in !element.isPause}) {
+            if let lastElement = exercisesOfSet.last {
+                if lastElement.isPause {
+                    copiedExerciseSet.removeLast()
+                }
+            }
+        }
+        choosableWorkouts.createNewExerciseSet(name: nameOfExerciseSet, exercises: copiedExerciseSet)
     }
     
     

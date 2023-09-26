@@ -41,9 +41,11 @@ struct V_CreateExerciseView: View {
                     let durationExercise = Int(durationOfExercise)
                     let durationPause = Int(durationOfPause)
                     
-                    if durationExercise != nil && durationPause != nil && durationExercise! > 0 && durationPause! > 0 && nameOfExercise != "" {
+                    if durationExercise != nil && durationPause != nil && durationExercise! > 0 && durationPause! >= 0 && nameOfExercise != "" {
                         createExercise.addExerciseToExerciseSet(name: nameOfExercise, isPause: false, durationInSeconds: durationExercise!)
-                        createExercise.addExerciseToExerciseSet(name: "Break", isPause: true, durationInSeconds: durationPause!)
+                        if durationPause! > 0{
+                            createExercise.addExerciseToExerciseSet(name: "Break", isPause: true, durationInSeconds: durationPause!)
+                        }
                         nameOfExercise = ""
                         durationOfPause = ""
                         durationOfExercise = ""

@@ -121,9 +121,9 @@ class MVC_Workout: ObservableObject {
     
     ///This function plays a sound depending on the type of exercises that has ended
     private func playSound(nextIsPause: Bool) {
-        var pathToSound = "singleBeep"
+        var pathToSound = "doubleBeep"
         if(nextIsPause) {
-            pathToSound = "doubleBeep"
+            pathToSound = "singleBeep"
         }
         let urlPossibleEmpty = Bundle.main.url(forResource: pathToSound, withExtension: "mp3")
         //Check that url is not empty
