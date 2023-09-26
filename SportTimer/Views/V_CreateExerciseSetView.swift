@@ -27,11 +27,8 @@ struct V_CreateExerciseSetView: View {
                 Form {
                     resetExercisesCreated
                     Section("Name of ExerciseSet") {
-                        if(testSaver1 == "") {
-                            nameSection.foregroundColor(.red)
-                        } else {
-                            nameSection.foregroundColor(.green)
-                        }
+                        nameSection.foregroundColor(.green)
+
                     }
                     Section("Add Exercise") {
                         NavigationLink("Add new Exercise") {
